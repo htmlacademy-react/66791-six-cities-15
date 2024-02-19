@@ -1,8 +1,12 @@
 import HomeScreen from '../../pages/home-screen/home-screen';
 
-function App(): JSX.Element {
+type AppProps = {
+  numberOffers: number;
+}
+
+function App({ numberOffers }: AppProps): JSX.Element {
   return (
-    <HomeScreen />
+    <HomeScreen numberOffers={numberOffers} />
   );
 }
 
