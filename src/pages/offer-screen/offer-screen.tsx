@@ -293,7 +293,7 @@ function OfferScreen(): JSX.Element {
                     id="review"
                     name="review"
                     placeholder="Tell how was your stay, what you like and what can be improved"
-                    defaultValue={''}
+                    defaultValue=""
                   />
                   <div className="reviews__button-wrapper">
                     <p className="reviews__help">
