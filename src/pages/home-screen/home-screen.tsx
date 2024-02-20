@@ -1,10 +1,10 @@
-import PlaceCard from './place-card/place-card';
+import PlaceCard from '../../components/place-card/place-card';
 
 type HomeScreenProps = {
   numberOffers: number;
 }
 
-function HomeScreen({ numberOffers }: HomeScreenProps): JSX.Element {
+function HomeScreen({numberOffers}: HomeScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">

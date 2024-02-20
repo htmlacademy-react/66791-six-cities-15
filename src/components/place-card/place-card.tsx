@@ -8,7 +8,7 @@ function PlaceCard(): JSX.Element {
         <a href="#">
           <img
             className="place-card__image"
-            src="../../../../markup/img/apartment-01.jpg"
+            src="../../../markup/img/apartment-01.jpg"
             width={260}
             height={200}
             alt="Place image"

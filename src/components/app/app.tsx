@@ -4,7 +4,7 @@ type AppProps = {
   numberOffers: number;
 }
 
-function App({ numberOffers }: AppProps): JSX.Element {
+function App({numberOffers}: AppProps): JSX.Element {
   return (
     <HomeScreen numberOffers={numberOffers} />
   );

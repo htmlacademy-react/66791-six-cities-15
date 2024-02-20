@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-
-const NUMBER_OFFERS = 5;
+import {NUMBER_OFFERS} from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
