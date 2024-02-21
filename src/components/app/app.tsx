@@ -2,11 +2,15 @@ import HomeScreen from '../../pages/home-screen/home-screen';
 
 type AppProps = {
   numberOffers: number;
+  cities: string[];
 }
 
-function App({numberOffers}: AppProps): JSX.Element {
+function App({cities, numberOffers}: AppProps): JSX.Element {
   return (
-    <HomeScreen numberOffers={numberOffers} />
+    <HomeScreen
+      cities={cities}
+      numberOffers={numberOffers}
+    />
   );
 }
 
