@@ -1,15 +1,12 @@
-// import HomeScreen from '../../pages/home-screen/home-screen';
-import LoginScreen from '../../pages/login-screen/login-screen';
+import HomeScreen from '../../pages/home-screen/home-screen';
 
-/*type AppProps = {
+type AppProps = {
   cities: string[];
-}*/
+}
 
-// function App({cities}: AppProps): JSX.Element {
-function App(): JSX.Element {
+function App({cities}: AppProps): JSX.Element {
   return (
-    // <HomeScreen cities={cities} />
-    <LoginScreen />
+    <HomeScreen cities={cities} />
   );
 }
 
