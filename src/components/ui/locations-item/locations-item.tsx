@@ -1,7 +1,7 @@
 type LocationsItemProps = {
   city: string;
-  isListItem: boolean;
-  isActiveCity: boolean;
+  isListItem?: boolean;
+  isActiveCity?: boolean;
 }
 
 function LocationsItem({isListItem = false, isActiveCity = false, city}: LocationsItemProps): JSX.Element {
