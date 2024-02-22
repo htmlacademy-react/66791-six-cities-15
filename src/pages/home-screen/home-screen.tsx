@@ -8,11 +8,10 @@ import PlacesSorting from './components/places-sorting/places-sorting';
 import {placeCardMocks} from '../../components/common/place-card/place-card-mocks';
 
 type HomeScreenProps = {
-  numberOffers: number;
   cities: string[];
 }
 
-function HomeScreen({cities, numberOffers}: HomeScreenProps): JSX.Element {
+function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -25,7 +24,7 @@ function HomeScreen({cities, numberOffers}: HomeScreenProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <PlacesFound numberOffers={numberOffers} />
+              <PlacesFound numberOffers={placeCardMocks.length} />
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
                 {placeCardMocks.map((placeCardMock) => (

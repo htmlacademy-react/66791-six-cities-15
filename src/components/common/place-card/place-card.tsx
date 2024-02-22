@@ -1,9 +1,14 @@
 import {placeCardMocksProps} from './place-card-mocks';
 
+type PlaceCardProps = {
+  isNearPlace?: boolean;
+}
+
 const NUMBER_STARS = 5;
 
-function PlaceCard(props: placeCardMocksProps): JSX.Element {
+function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
   const {
+    isNearPlace,
     title,
     type,
     price,
@@ -14,13 +19,13 @@ function PlaceCard(props: placeCardMocksProps): JSX.Element {
   } = props;
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${isNearPlace ? 'near-places__card' : 'cities__card'} place-card`}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${isNearPlace ? 'near-places__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"

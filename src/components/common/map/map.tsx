@@ -1,5 +1,5 @@
 type MapProps = {
-  isMainMap: boolean;
+  isMainMap?: boolean;
 }
 
 function Map({isMainMap}: MapProps): JSX.Element {

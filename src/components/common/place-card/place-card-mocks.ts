@@ -20,7 +20,7 @@ export const placeCardMocks: placeCardMocksProps[] = [
     type: 'room',
     price: 101,
     previewImage: apartmentImg01,
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     rating: 1.6
   },
@@ -60,7 +60,7 @@ export const placeCardMocks: placeCardMocksProps[] = [
     type: 'hotel',
     price: 151,
     previewImage: apartmentImg03,
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 5
   },
