@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 type HeaderProps = {
   isLoginHeader?: boolean;
 }
@@ -8,7 +10,7 @@ function Header({isLoginHeader}: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a className="header__logo-link header__logo-link--active">
+            <Link className="header__logo-link header__logo-link--active" to="/">
               <img
                 className="header__logo"
                 src="../../../../markup/img/logo.svg"
@@ -16,7 +18,7 @@ function Header({isLoginHeader}: HeaderProps): JSX.Element {
                 width={81}
                 height={41}
               />
-            </a>
+            </Link>
           </div>
           {!isLoginHeader && (
             <nav className="header__nav">
