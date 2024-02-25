@@ -6,3 +6,10 @@ export const CITIES: string[] = [
   'Hamburg',
   'Dusseldorf'
 ];
+
+export enum AppRoute {
+  Home = '/',
+  Login = 'login',
+  Favorites = 'favorites',
+  Offer = 'offer/:id'
+}
