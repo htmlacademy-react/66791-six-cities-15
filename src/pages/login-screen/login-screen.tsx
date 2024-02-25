@@ -1,9 +1,11 @@
+import Meta from '../../components/common/meta/meta';
 import Header from '../../components/common/header/header';
 import LocationsItem from '../../components/ui/locations-item/locations-item';
 
 function LoginScreen(): JSX.Element {
   return (
     <div className="page page--gray page--login">
+      <Meta titleText="6/Cities. Authorization" />
       <Header isLoginHeader />
       <main className="page__main page__main--login">
         <div className="page__login-container container">

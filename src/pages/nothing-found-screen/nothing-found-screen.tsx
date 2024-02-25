@@ -1,15 +1,17 @@
+import Meta from '../../components/common/meta/meta';
 import Header from '../../components/common/header/header';
 import Footer from '../../components/common/footer/footer';
 
 function NothingFoundScreen(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
+      <Meta titleText="6/Cities. 404 Not Found" />
       <Header />
 
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
           <section className="favorites favorites--empty">
-            <h1 className="visually-hidden">Favorites (empty)</h1>
+            <h1 className="visually-hidden">404 Not Found</h1>
             <div
               className="favorites__status-wrapper"
               style={{

@@ -1,3 +1,4 @@
+import Meta from '../../components/common/meta/meta';
 import Header from '../../components/common/header/header';
 import NearPlaces from './components/near-places/near-places';
 import Map from '../../components/common/map/map';
@@ -5,6 +6,7 @@ import Map from '../../components/common/map/map';
 function OfferScreen(): JSX.Element {
   return (
     <div className="page">
+      <Meta titleText="6/Cities. Beautiful &amp; luxurious studio at great location" />
       <Header />
 
       <main className="page__main page__main--offer">

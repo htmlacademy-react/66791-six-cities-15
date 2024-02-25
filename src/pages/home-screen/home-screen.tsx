@@ -1,3 +1,4 @@
+import Meta from '../../components/common/meta/meta';
 import Header from '../../components/common/header/header';
 import PlaceCard from '../../components/common/place-card/place-card';
 import Map from '../../components/common/map/map';
@@ -14,6 +15,7 @@ type HomeScreenProps = {
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Meta titleText={`6/Cities. ${placeCardMocks.length} places to stay in Amsterdam`} />
       <Header />
 
       <main className="page__main page__main--index">
