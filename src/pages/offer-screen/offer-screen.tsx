@@ -1,13 +1,11 @@
 import Meta from '../../components/common/meta';
-import Header from '../../components/common/header';
 import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 
 function OfferScreen(): JSX.Element {
   return (
-    <div className="page">
+    <>
       <Meta titleText="6/Cities. Beautiful &amp; luxurious studio at great location" />
-      <Header />
 
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -290,7 +288,7 @@ function OfferScreen(): JSX.Element {
           <NearPlaces />
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

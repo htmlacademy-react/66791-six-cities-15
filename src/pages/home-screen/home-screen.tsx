@@ -1,5 +1,4 @@
 import Meta from '../../components/common/meta';
-import Header from '../../components/common/header';
 import PlaceCard from '../../components/common/place-card';
 import Map from '../../components/common/map';
 import Tabs from './components/tabs';
@@ -14,9 +13,8 @@ type HomeScreenProps = {
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   return (
-    <div className="page page--gray page--main">
+    <>
       <Meta titleText={`6/Cities. ${placeCardMocks.length} places to stay in Amsterdam`} />
-      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -43,7 +41,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

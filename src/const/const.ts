@@ -9,9 +9,9 @@ export const CITIES: string[] = [
 
 export enum AppRoute {
   Root = '/',
-  Login = 'login',
-  Favorites = 'favorites',
-  Offer = 'offer/:id'
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
 }
 
 export enum AuthorizationStatus {

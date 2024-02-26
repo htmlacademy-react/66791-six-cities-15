@@ -1,1 +1,1 @@
-export * from './mocks';
+export * from './place-card-mocks';

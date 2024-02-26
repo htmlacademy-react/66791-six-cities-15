@@ -1,13 +1,11 @@
 import Meta from '../../components/common/meta';
-import Header from '../../components/common/header';
 import Footer from '../../components/common/footer';
 import LocationsItem from '../../components/ui/locations-item';
 
 function FavoritesScreen(): JSX.Element {
   return (
-    <div className="page">
+    <>
       <Meta titleText="6/Cities. Saved listing" />
-      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
@@ -177,7 +175,7 @@ function FavoritesScreen(): JSX.Element {
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

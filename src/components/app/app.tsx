@@ -1,6 +1,7 @@
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import Layout from '../layout';
 import HomeScreen from '../../pages/home-screen';
 import LoginScreen from '../../pages/login-screen';
 import FavoritesScreen from '../../pages/favorites-screen';
@@ -17,7 +18,7 @@ function App({cities}: AppProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root}>
+          <Route path={AppRoute.Root} element={<Layout />}>
             <Route index element={<HomeScreen cities={cities} />} />
             <Route path={AppRoute.Offer} element={<OfferScreen />} />
             <Route path={AppRoute.Login} element={<LoginScreen />} />
