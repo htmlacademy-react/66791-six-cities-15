@@ -1,7 +1,7 @@
-import Meta from '../../components/common/meta/meta';
-import Header from '../../components/common/header/header';
-import Footer from '../../components/common/footer/footer';
-import LocationsItem from '../../components/ui/locations-item/locations-item';
+import Meta from '../../components/common/meta';
+import Header from '../../components/common/header';
+import Footer from '../../components/common/footer';
+import LocationsItem from '../../components/ui/locations-item';
 
 function FavoritesScreen(): JSX.Element {
   return (

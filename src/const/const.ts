@@ -8,7 +8,7 @@ export const CITIES: string[] = [
 ];
 
 export enum AppRoute {
-  Home = '/',
+  Root = '/',
   Login = 'login',
   Favorites = 'favorites',
   Offer = 'offer/:id'

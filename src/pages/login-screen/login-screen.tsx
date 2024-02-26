@@ -1,6 +1,6 @@
-import Meta from '../../components/common/meta/meta';
-import Header from '../../components/common/header/header';
-import LocationsItem from '../../components/ui/locations-item/locations-item';
+import Meta from '../../components/common/meta';
+import Header from '../../components/common/header';
+import LocationsItem from '../../components/ui/locations-item';
 
 function LoginScreen(): JSX.Element {
   return (

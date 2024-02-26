@@ -1,4 +1,4 @@
-import {placeCardMocksProps} from './place-card-mocks';
+import {placeCardMocksProps} from '../../../mocks';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;

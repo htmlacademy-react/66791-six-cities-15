@@ -1,12 +1,12 @@
-import Meta from '../../components/common/meta/meta';
-import Header from '../../components/common/header/header';
-import PlaceCard from '../../components/common/place-card/place-card';
-import Map from '../../components/common/map/map';
-import Tabs from './components/tabs/tabs';
-import PlacesFound from './components/places-found/places-found';
-import PlacesSorting from './components/places-sorting/places-sorting';
+import Meta from '../../components/common/meta';
+import Header from '../../components/common/header';
+import PlaceCard from '../../components/common/place-card';
+import Map from '../../components/common/map';
+import Tabs from './components/tabs';
+import PlacesFound from './components/places-found';
+import PlacesSorting from './components/places-sorting';
 
-import {placeCardMocks} from '../../components/common/place-card/place-card-mocks';
+import {placeCardMocks} from '../../mocks';
 
 type HomeScreenProps = {
   cities: string[];

@@ -1,6 +1,6 @@
 import PlaceCard from '../../../../components/common/place-card/place-card';
 
-import {placeCardMocks} from '../../../../components/common/place-card/place-card-mocks';
+import {placeCardMocks} from '../../../../mocks';
 
 const NUMBER_OFFERS = 3;
 

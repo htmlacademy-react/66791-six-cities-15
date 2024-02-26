@@ -1,7 +1,7 @@
-import Meta from '../../components/common/meta/meta';
-import Header from '../../components/common/header/header';
-import NearPlaces from './components/near-places/near-places';
-import Map from '../../components/common/map/map';
+import Meta from '../../components/common/meta';
+import Header from '../../components/common/header';
+import NearPlaces from './components/near-places';
+import Map from '../../components/common/map';
 
 function OfferScreen(): JSX.Element {
   return (
