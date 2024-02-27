@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 type LocationsItemProps = {
   city: string;
   isListItem?: boolean;
@@ -7,18 +9,18 @@ type LocationsItemProps = {
 function LocationsItem({isListItem = false, isActiveCity = false, city}: LocationsItemProps): JSX.Element {
   return isListItem ? (
     <li className="locations__item">
-      <a
+      <Link
         className={`locations__item-link tabs__item ${isActiveCity && 'tabs__item tabs__item--active'}`}
-        href="#"
+        to={`/?tab=${city.toLowerCase()}`}
       >
         <span>{city}</span>
-      </a>
+      </Link>
     </li>
   ) : (
     <div className="locations__item">
-      <a className="locations__item-link" href="#">
+      <Link className="locations__item-link" to={`/?tab=${city.toLowerCase()}`}>
         <span>{city}</span>
-      </a>
+      </Link>
     </div>
   );
 }
