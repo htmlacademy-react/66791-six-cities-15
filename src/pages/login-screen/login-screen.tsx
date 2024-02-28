@@ -1,10 +1,11 @@
-import Header from '../../components/common/header/header';
-import LocationsItem from '../../components/ui/locations-item/locations-item';
+import Meta from '../../components/common/meta';
+import LocationsItem from '../../components/ui/locations-item';
 
 function LoginScreen(): JSX.Element {
   return (
-    <div className="page page--gray page--login">
-      <Header isLoginHeader />
+    <>
+      <Meta titleText="6/Cities. Authorization" />
+
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -40,7 +41,7 @@ function LoginScreen(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

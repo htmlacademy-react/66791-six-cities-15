@@ -1,6 +1,6 @@
-import apartmentImg01 from './../../../../markup/img/apartment-01.jpg';
-import apartmentImg02 from './../../../../markup/img/apartment-02.jpg';
-import apartmentImg03 from './../../../../markup/img/apartment-03.jpg';
+import apartmentImg01 from '../../markup/img/apartment-01.jpg';
+import apartmentImg02 from '../../markup/img/apartment-02.jpg';
+import apartmentImg03 from '../../markup/img/apartment-03.jpg';
 
 export type placeCardMocksProps = {
   id: string;

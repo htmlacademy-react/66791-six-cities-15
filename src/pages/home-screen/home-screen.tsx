@@ -1,11 +1,11 @@
-import Header from '../../components/common/header/header';
-import PlaceCard from '../../components/common/place-card/place-card';
-import Map from '../../components/common/map/map';
-import Tabs from './components/tabs/tabs';
-import PlacesFound from './components/places-found/places-found';
-import PlacesSorting from './components/places-sorting/places-sorting';
+import Meta from '../../components/common/meta';
+import PlaceCard from '../../components/common/place-card';
+import Map from '../../components/common/map';
+import Tabs from './components/tabs';
+import PlacesFound from './components/places-found';
+import PlacesSorting from './components/places-sorting';
 
-import {placeCardMocks} from '../../components/common/place-card/place-card-mocks';
+import {placeCardMocks} from '../../mocks';
 
 type HomeScreenProps = {
   cities: string[];
@@ -13,8 +13,8 @@ type HomeScreenProps = {
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   return (
-    <div className="page page--gray page--main">
-      <Header />
+    <>
+      <Meta titleText={`6/Cities. ${placeCardMocks.length} places to stay in Amsterdam`} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -27,9 +27,10 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
               <PlacesFound numberOffers={placeCardMocks.length} />
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                {placeCardMocks.map((placeCardMock) => (
+                {placeCardMocks.map((placeCardMock, index) => (
                   <PlaceCard
                     key={placeCardMock.id}
+                    index={++index}
                     {...placeCardMock}
                   />
                 ))}
@@ -41,7 +42,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 
