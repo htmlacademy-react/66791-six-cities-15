@@ -7,6 +7,7 @@ import FavoritesScreen from '../../pages/favorites-screen';
 import OfferScreen from '../../pages/offer-screen';
 import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
+import ScrollToTop from '../ui/scroll-to-top';
 import {AppRoute} from '../../const';
 import {getAuthorizationStatus} from '../../mocks';
 
@@ -20,6 +21,7 @@ function App({cities}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />}>
             <Route index element={<HomeScreen cities={cities} />} />
