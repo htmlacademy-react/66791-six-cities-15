@@ -12,7 +12,7 @@ function Layout(): JSX.Element {
   return (
     <div className={getClassNameLayout(currentRoute)}>
       <Header
-        isLoginRoute={currentRoute === AppRoute.Root}
+        isRootRoute={currentRoute === AppRoute.Root}
         isRenderUser={!(currentRoute === AppRoute.Login)}
         authStatus={getAuthorizationStatus()}
       />

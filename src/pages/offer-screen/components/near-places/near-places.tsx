@@ -11,10 +11,11 @@ function NearPlaces(): JSX.Element {
         Other places in the neighbourhood
       </h2>
       <div className="near-places__list places__list">
-        {placeCardMocks.slice(0, NUMBER_OFFERS).map((placeCardMock) => (
+        {placeCardMocks.slice(0, NUMBER_OFFERS).map((placeCardMock, index) => (
           <PlaceCard
             isNearPlace
             key={placeCardMock.id}
+            index={++index}
             {...placeCardMock}
           />
         ))}
