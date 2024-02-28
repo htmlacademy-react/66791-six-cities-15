@@ -1,5 +1,4 @@
 import Meta from '../../components/common/meta';
-import Footer from '../../components/common/footer';
 import LocationsItem from '../../components/ui/locations-item';
 
 function FavoritesScreen(): JSX.Element {
@@ -173,8 +172,6 @@ function FavoritesScreen(): JSX.Element {
           </section>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute, AuthorizationStatus} from '../../const';
 import Layout from '../layout';
 import HomeScreen from '../../pages/home-screen';
 import LoginScreen from '../../pages/login-screen';
@@ -8,6 +7,8 @@ import FavoritesScreen from '../../pages/favorites-screen';
 import OfferScreen from '../../pages/offer-screen';
 import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
+import {AppRoute} from '../../const';
+import {getAuthorizationStatus} from '../../mocks';
 
 type AppProps = {
   cities: string[];
@@ -25,7 +26,7 @@ function App({cities}: AppProps): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+                <PrivateRoute authorizationStatus={getAuthorizationStatus()}>
                   <FavoritesScreen />
                 </PrivateRoute>
               }
