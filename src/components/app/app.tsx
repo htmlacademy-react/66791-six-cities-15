@@ -15,18 +15,27 @@ type AppProps = {
 }
 
 function App({cities}: AppProps): JSX.Element {
+  const authStatus = getAuthorizationStatus();
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root} element={<Layout />}>
             <Route index element={<HomeScreen cities={cities} />} />
-            <Route path={AppRoute.Offer} element={<OfferScreen />} />
-            <Route path={AppRoute.Login} element={<LoginScreen />} />
+            <Route path={AppRoute.Offer} element={<OfferScreen authorizationStatus={authStatus} />} />
+            <Route
+              path={AppRoute.Login}
+              element={
+                <PrivateRoute authorizationStatus={authStatus} isReverse>
+                  <LoginScreen />
+                </PrivateRoute>
+              }
+            />
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute authorizationStatus={getAuthorizationStatus()}>
+                <PrivateRoute authorizationStatus={authStatus}>
                   <FavoritesScreen />
                 </PrivateRoute>
               }
