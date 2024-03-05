@@ -1,16 +1,15 @@
 import {Link} from 'react-router-dom';
-import {placeCardMocksProps} from '../../../mocks';
+import {OffersType} from '../../../types';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
-  index: number;
 }
 
 const NUMBER_STARS = 5;
 
-function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
+function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
   const {
-    index,
+    id,
     isNearPlace,
     title,
     type,
@@ -29,7 +28,7 @@ function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
         </div>
       )}
       <div className={`${isNearPlace ? 'near-places__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
-        <Link to={`/offer/${index}`}>
+        <Link to={`/offer/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -66,7 +65,7 @@ function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${index}`}>
+          <Link to={`/offer/${id}`}>
             {title}
           </Link>
         </h2>

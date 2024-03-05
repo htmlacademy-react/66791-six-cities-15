@@ -1,6 +1,6 @@
 import {ReviewsType} from '../types/reviews-type';
 
-export const ReviewsMocks: ReviewsType = {
+export const reviewsMocks: ReviewsType = {
   'b23206da-0873-4b14-87c2-cd5f47cb7cdb': [
     {
       id: 'cc6c53fc-3656-4150-b6ef-a9a1a1ee295c',

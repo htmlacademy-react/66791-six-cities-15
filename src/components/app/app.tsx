@@ -8,24 +8,42 @@ import OfferScreen from '../../pages/offer-screen';
 import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
-import {AppRoute} from '../../const';
-import {getAuthorizationStatus} from '../../mocks';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {OffersType, ReviewsType} from '../../types';
 
 type AppProps = {
+  authStatus: AuthorizationStatus;
   cities: string[];
+  offers: OffersType[];
+  reviews: ReviewsType;
 }
 
-function App({cities}: AppProps): JSX.Element {
-  const authStatus = getAuthorizationStatus();
-
+function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />}>
-            <Route index element={<HomeScreen cities={cities} />} />
-            <Route path={AppRoute.Offer} element={<OfferScreen authorizationStatus={authStatus} />} />
+          <Route path={AppRoute.Root} element={<Layout authorizationStatus={authStatus} />}>
+            <Route
+              index
+              element={
+                <HomeScreen
+                  cities={cities}
+                  offers={offers}
+                />
+              }
+            />
+            <Route
+              path={AppRoute.Offer}
+              element={
+                <OfferScreen
+                  authorizationStatus={authStatus}
+                  offers={offers}
+                  reviews={reviews}
+                />
+              }
+            />
             <Route
               path={AppRoute.Login}
               element={

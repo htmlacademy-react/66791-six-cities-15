@@ -1,13 +1,19 @@
+import {useParams} from 'react-router-dom';
 import Meta from '../../components/common/meta';
 import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 import {AuthorizationStatus} from '../../const';
+import {OffersType, ReviewsType} from '../../types';
 
 type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
+  offers: OffersType[];
+  reviews: ReviewsType;
 }
 
-function OfferScreen({authorizationStatus}: OfferScreenProps): JSX.Element {
+function OfferScreen({authorizationStatus, offers, reviews}: OfferScreenProps): JSX.Element {
+  const {id} = useParams();
+
   return (
     <>
       <Meta titleText="6/Cities. Beautiful &amp; luxurious studio at great location" />
@@ -141,7 +147,7 @@ function OfferScreen({authorizationStatus}: OfferScreenProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">
-                  Reviews · <span className="reviews__amount">1</span>
+                  Reviews · <span className="reviews__amount">{id && reviews[id].length}</span>
                 </h2>
                 <ul className="reviews__list">
                   <li className="reviews__item">
@@ -292,7 +298,7 @@ function OfferScreen({authorizationStatus}: OfferScreenProps): JSX.Element {
           <Map/>
         </section>
         <div className="container">
-          <NearPlaces/>
+          <NearPlaces offers={offers} />
         </div>
       </main>
     </>
