@@ -1,4 +1,4 @@
-export type HostType = {
+export type UserType = {
   isPro: boolean;
   name: string;
   avatarUrl: string;
@@ -13,7 +13,7 @@ export type OffersType = {
   previewImage: string;
   images: string[];
   goods: string[];
-  host: HostType;
+  host: UserType;
   isPremium: boolean;
   isFavorite: boolean;
   rating: number;
