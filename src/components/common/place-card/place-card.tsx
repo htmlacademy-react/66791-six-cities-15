@@ -3,6 +3,7 @@ import {OffersType} from '../../../types';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
+  hoverPlaceCard?: (offerId: string) => void;
 }
 
 const NUMBER_STARS = 5;
@@ -17,11 +18,16 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
     previewImage,
     isFavorite,
     isPremium,
-    rating
+    rating,
+    hoverPlaceCard
   } = props;
 
   return (
-    <article className={`${isNearPlace ? 'near-places__card' : 'cities__card'} place-card`}>
+    <article
+      className={`${isNearPlace ? 'near-places__card' : 'cities__card'} place-card`}
+      onMouseEnter={() => hoverPlaceCard && hoverPlaceCard(id)}
+      onMouseLeave={() => hoverPlaceCard && hoverPlaceCard('')}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

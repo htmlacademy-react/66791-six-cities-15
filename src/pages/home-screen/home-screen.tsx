@@ -1,5 +1,5 @@
 import Meta from '../../components/common/meta';
-import PlaceCard from '../../components/common/place-card';
+import PlacesList from './components/places-list';
 import Map from '../../components/common/map';
 import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
@@ -28,14 +28,7 @@ function HomeScreen({cities, offers}: HomeScreenProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <PlacesFound numberOffers={numberOffers} />
               <PlacesSorting />
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <PlaceCard
-                    key={offer.id}
-                    {...offer}
-                  />
-                ))}
-              </div>
+              <PlacesList offers={offers} />
             </section>
             <div className="cities__right-section">
               <Map isMainMap />
