@@ -1,7 +1,8 @@
 import {matchPath} from 'react-router-dom';
 import {AppRoute} from '../const';
+import {OffersType} from '../types';
 
-export const getClassNameLayout = function (pathname: AppRoute):string {
+export const getClassNameLayout = function (pathname: AppRoute, offers: OffersType[]):string {
   const isRootRoute = pathname === AppRoute.Root;
   const isLoginRoute = pathname === AppRoute.Login;
   const isNotRoute = !Object.keys(AppRoute).some((route) => matchPath(
@@ -17,7 +18,7 @@ export const getClassNameLayout = function (pathname: AppRoute):string {
     classNameLayout += ' page--gray page--login';
   }
 
-  if (isNotRoute) {
+  if (isNotRoute || offers.length === 0) {
     classNameLayout += ' page--favorites-empty';
   }
 

@@ -24,7 +24,15 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout authorizationStatus={authStatus} />}>
+          <Route
+            path={AppRoute.Root}
+            element={
+              <Layout
+                authorizationStatus={authStatus}
+                offers={offers}
+              />
+            }
+          >
             <Route
               index
               element={
@@ -56,7 +64,9 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={authStatus}>
-                  <FavoritesScreen />
+                  <FavoritesScreen
+                    offers={offers.filter((offer) => offer.isFavorite)}
+                  />
                 </PrivateRoute>
               }
             />

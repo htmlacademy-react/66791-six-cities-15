@@ -65,7 +65,7 @@ export const offersMocks: OffersType[] = [
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: false,
-    isFavorite: false,
+    isFavorite: true,
     rating: 3.3,
     bedrooms: 4,
     maxAdults: 6
@@ -134,7 +134,7 @@ export const offersMocks: OffersType[] = [
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
-    isFavorite: false,
+    isFavorite: true,
     rating: 3,
     bedrooms: 1,
     maxAdults: 2
@@ -205,7 +205,7 @@ export const offersMocks: OffersType[] = [
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
-    isFavorite: false,
+    isFavorite: true,
     rating: 4.5,
     bedrooms: 1,
     maxAdults: 2
