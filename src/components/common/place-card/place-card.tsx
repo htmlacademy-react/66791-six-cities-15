@@ -1,13 +1,12 @@
 import {Link} from 'react-router-dom';
 import {OffersType} from '../../../types';
+import {NUMBER_STARS} from '../../../const';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
   isFavorites?: boolean;
   hoverPlaceCard?: (offerId: string) => void;
 }
-
-const NUMBER_STARS = 5;
 
 function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
   const {
