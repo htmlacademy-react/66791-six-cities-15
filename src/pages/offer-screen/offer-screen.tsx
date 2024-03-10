@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
 import ReviewsForm from './components/reviews-form';
 import NearPlaces from './components/near-places';
@@ -14,6 +15,11 @@ type OfferScreenProps = {
 
 function OfferScreen({authorizationStatus, offers, reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
+  const currentOffer: OffersType | undefined = offers.find((offer: OffersType) => offer.id === id);
+
+  if (!currentOffer) {
+    return <NothingFoundScreen isNotFoundOffer />;
+  }
 
   return (
     <>

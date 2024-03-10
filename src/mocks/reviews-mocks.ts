@@ -1,4 +1,4 @@
-import {ReviewsType} from '../types/reviews-type';
+import {ReviewsType} from '../types';
 
 export const reviewsMocks: ReviewsType = {
   'b23206da-0873-4b14-87c2-cd5f47cb7cdb': [

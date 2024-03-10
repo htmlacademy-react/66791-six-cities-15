@@ -2,9 +2,10 @@ import Meta from '../../components/common/meta';
 
 type NothingFoundScreenProps = {
   isFavoritesEmpty?: boolean;
+  isNotFoundOffer?: boolean;
 }
 
-function NothingFoundScreen({isFavoritesEmpty}: NothingFoundScreenProps): JSX.Element {
+function NothingFoundScreen({isFavoritesEmpty, isNotFoundOffer}: NothingFoundScreenProps): JSX.Element {
   const nothingFoundState = () => {
     const state = {
       metaTitle: '',
@@ -21,7 +22,9 @@ function NothingFoundScreen({isFavoritesEmpty}: NothingFoundScreenProps): JSX.El
     } else {
       state.metaTitle = '6/Cities. 404 Not Found';
       state.title = state.status = '404 Not Found';
-      state.statusDescription = 'The resource requested could not be found on this server!';
+      state.statusDescription = isNotFoundOffer
+        ? 'Ooops! We have no offers with that ID!'
+        : 'The resource requested could not be found on this server!';
     }
 
     return state;
