@@ -1,8 +1,12 @@
-import {Fragment} from 'react';
+import {Fragment, ChangeEvent} from 'react';
 import {NUMBER_STARS, StarsTitle} from '../../../../const';
 import {firstLetterToUppercase} from '../../../../utils';
 
-function RatingForm(): JSX.Element {
+type RatingFormProps = {
+  onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+}
+
+function RatingForm({onChange}: RatingFormProps): JSX.Element {
   return (
     <div className="reviews__rating-form form__rating">
       {Array(NUMBER_STARS).fill('star').map((item, index, stars) => {
@@ -20,6 +24,7 @@ function RatingForm(): JSX.Element {
               defaultValue={starIndex}
               id={`${starIndex}-${declension}`}
               type="radio"
+              onChange={onChange}
             />
             <label
               htmlFor={`${starIndex}-${declension}`}
