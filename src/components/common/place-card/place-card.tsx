@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {OffersType} from '../../../types';
-import {NUMBER_STARS} from '../../../const';
+import {AppRoute, NUMBER_STARS} from '../../../const';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
@@ -56,7 +56,7 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
         </div>
       )}
       <div className={`${wrapperClassName} place-card__image-wrapper`}>
-        <Link to={`/offer/${id}`}>
+        <Link to={AppRoute.Offer.replace(/:id/, id)}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -93,7 +93,7 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>
+          <Link to={AppRoute.Offer.replace(/:id/, id)}>
             {title}
           </Link>
         </h2>

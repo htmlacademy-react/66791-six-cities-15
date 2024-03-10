@@ -15,7 +15,7 @@ type OfferScreenProps = {
 
 function OfferScreen({authorizationStatus, offers, reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
-  const currentOffer: OffersType | undefined = offers.find((offer: OffersType) => offer.id === id);
+  const currentOffer = offers.find((offer: OffersType) => offer.id === id);
 
   if (!currentOffer) {
     return <NothingFoundScreen isNotFoundOffer />;

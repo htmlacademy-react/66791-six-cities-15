@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../../const';
 
 type LogoProps = {
   isRootRoute?: boolean;
@@ -16,7 +17,7 @@ function LogoLink ({isRootRoute, isFooterLogo, children}: LogoLinkProps): JSX.El
     isRootRoute ? (
       <a className={`${logoLinkClassName} header__logo-link--active`}>{children}</a>
     ) : (
-      <Link className={logoLinkClassName} to="/">{children}</Link>
+      <Link className={logoLinkClassName} to={AppRoute.Root}>{children}</Link>
     )
   );
 }
