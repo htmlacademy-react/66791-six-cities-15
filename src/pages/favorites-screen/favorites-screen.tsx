@@ -9,7 +9,7 @@ type FavoritesScreenProps = {
 
 function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
   if (offers.length === 0) {
-    return (<NothingFoundScreen isFavoritesEmpty />);
+    return (<NothingFoundScreen state="favorites" />);
   }
 
   return (

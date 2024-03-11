@@ -18,7 +18,7 @@ function OfferScreen({authorizationStatus, offers, reviews}: OfferScreenProps): 
   const currentOffer = offers.find((offer: OffersType) => offer.id === id);
 
   if (!currentOffer) {
-    return <NothingFoundScreen isNotFoundOffer />;
+    return <NothingFoundScreen state="offer" />;
   }
 
   return (

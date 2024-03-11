@@ -70,7 +70,7 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
                 </PrivateRoute>
               }
             />
-            <Route path="*" element={<NothingFoundScreen />} />
+            <Route path="*" element={<NothingFoundScreen state="page" />} />
           </Route>
         </Routes>
       </BrowserRouter>
