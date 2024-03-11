@@ -1,16 +1,17 @@
 import {Link} from 'react-router-dom';
-import {placeCardMocksProps} from '../../../mocks';
+import {OffersType} from '../../../types';
+import {AppRoute, NUMBER_STARS} from '../../../const';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
-  index: number;
+  isFavorites?: boolean;
+  hoverPlaceCard?: (offerId: string) => void;
 }
 
-const NUMBER_STARS = 5;
-
-function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
+function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
   const {
-    index,
+    id,
+    isFavorites,
     isNearPlace,
     title,
     type,
@@ -18,18 +19,44 @@ function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
     previewImage,
     isFavorite,
     isPremium,
-    rating
+    rating,
+    hoverPlaceCard
   } = props;
 
+  const placeCardDefineClassName = (): {articleClassName: string; wrapperClassName: string} => {
+    const names = {
+      articleClassName: '',
+      wrapperClassName: ''
+    };
+
+    if (isNearPlace) {
+      names.articleClassName += 'near-places__card';
+      names.wrapperClassName += 'near-places__image-wrapper';
+    } else if (isFavorites) {
+      names.articleClassName += 'favorites__card';
+      names.wrapperClassName += 'favorites__image-wrapper';
+    } else {
+      names.articleClassName += 'cities__card';
+      names.wrapperClassName += 'cities__image-wrapper';
+    }
+
+    return names;
+  };
+  const {articleClassName, wrapperClassName} = placeCardDefineClassName();
+
   return (
-    <article className={`${isNearPlace ? 'near-places__card' : 'cities__card'} place-card`}>
+    <article
+      className={`${articleClassName} place-card`}
+      onMouseEnter={() => hoverPlaceCard && hoverPlaceCard(id)}
+      onMouseLeave={() => hoverPlaceCard && hoverPlaceCard('')}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className={`${isNearPlace ? 'near-places__image-wrapper' : 'cities__image-wrapper'} place-card__image-wrapper`}>
-        <Link to={`/offer/${index}`}>
+      <div className={`${wrapperClassName} place-card__image-wrapper`}>
+        <Link to={AppRoute.Offer.replace(/:id/, id)}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -39,7 +66,7 @@ function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${isFavorites ? 'favorites__card-info ' : ''}place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>
@@ -66,7 +93,7 @@ function PlaceCard(props: placeCardMocksProps & PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${index}`}>
+          <Link to={AppRoute.Offer.replace(/:id/, id)}>
             {title}
           </Link>
         </h2>

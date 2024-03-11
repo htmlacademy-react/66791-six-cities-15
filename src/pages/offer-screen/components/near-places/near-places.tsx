@@ -1,22 +1,24 @@
 import PlaceCard from '../../../../components/common/place-card/place-card';
-
-import {placeCardMocks} from '../../../../mocks';
+import {OffersType} from '../../../../types';
 
 const NUMBER_OFFERS = 3;
 
-function NearPlaces(): JSX.Element {
+type NearPlacesProps = {
+  offers: OffersType[];
+}
+
+function NearPlaces({offers}: NearPlacesProps): JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">
         Other places in the neighbourhood
       </h2>
       <div className="near-places__list places__list">
-        {placeCardMocks.slice(0, NUMBER_OFFERS).map((placeCardMock, index) => (
+        {offers.slice(0, NUMBER_OFFERS).map((offer) => (
           <PlaceCard
             isNearPlace
-            key={placeCardMock.id}
-            index={++index}
-            {...placeCardMock}
+            key={offer.id}
+            {...offer}
           />
         ))}
       </div>

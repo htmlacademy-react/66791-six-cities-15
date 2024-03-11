@@ -1,7 +1,7 @@
 import {matchPath} from 'react-router-dom';
 import {AppRoute} from '../const';
 
-export const getClassNameLayout = function (pathname: AppRoute):string {
+export const getClassNameLayout = function (pathname: AppRoute, isNotFound: boolean):string {
   const isRootRoute = pathname === AppRoute.Root;
   const isLoginRoute = pathname === AppRoute.Login;
   const isNotRoute = !Object.keys(AppRoute).some((route) => matchPath(
@@ -17,7 +17,7 @@ export const getClassNameLayout = function (pathname: AppRoute):string {
     classNameLayout += ' page--gray page--login';
   }
 
-  if (isNotRoute) {
+  if (isNotRoute || isNotFound) {
     classNameLayout += ' page--favorites-empty';
   }
 

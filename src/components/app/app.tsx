@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import Layout from '../layout';
@@ -8,24 +9,54 @@ import OfferScreen from '../../pages/offer-screen';
 import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
-import {AppRoute} from '../../const';
-import {getAuthorizationStatus} from '../../mocks';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {OffersType, ReviewsType} from '../../types';
 
 type AppProps = {
+  authStatus: AuthorizationStatus;
   cities: string[];
+  offers: OffersType[];
+  reviews: ReviewsType;
 }
 
-function App({cities}: AppProps): JSX.Element {
-  const authStatus = getAuthorizationStatus();
+function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
+  const [isNotFound, setIsNotFound] = useState(false);
+  const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} element={<Layout />}>
-            <Route index element={<HomeScreen cities={cities} />} />
-            <Route path={AppRoute.Offer} element={<OfferScreen authorizationStatus={authStatus} />} />
+          <Route
+            path={AppRoute.Root}
+            element={
+              <Layout
+                authorizationStatus={authStatus}
+                isNotFound={isNotFound}
+              />
+            }
+          >
+            <Route
+              index
+              element={
+                <HomeScreen
+                  cities={cities}
+                  offers={offers}
+                />
+              }
+            />
+            <Route
+              path={AppRoute.Offer}
+              element={
+                <OfferScreen
+                  authorizationStatus={authStatus}
+                  offers={offers}
+                  reviews={reviews}
+                  setNotFound={setNotFoundFlag}
+                />
+              }
+            />
             <Route
               path={AppRoute.Login}
               element={
@@ -38,11 +69,14 @@ function App({cities}: AppProps): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={authStatus}>
-                  <FavoritesScreen />
+                  <FavoritesScreen
+                    offers={offers.filter((offer) => offer.isFavorite)}
+                    setNotFound={setNotFoundFlag}
+                  />
                 </PrivateRoute>
               }
             />
-            <Route path="*" element={<NothingFoundScreen />} />
+            <Route path="*" element={<NothingFoundScreen state="page" />} />
           </Route>
         </Routes>
       </BrowserRouter>

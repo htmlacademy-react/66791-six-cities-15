@@ -3,21 +3,26 @@ import Header from '../common/header';
 import Footer from '../common/footer';
 import {getClassNameLayout, isRenderFooter} from '../../utils';
 import {AppRoute} from '../../const';
-import {getAuthorizationStatus} from '../../mocks';
+import {AuthorizationStatus} from '../../const';
 
-function Layout(): JSX.Element {
+type LayoutProp = {
+  authorizationStatus: AuthorizationStatus;
+  isNotFound: boolean;
+}
+
+function Layout({authorizationStatus, isNotFound}: LayoutProp): JSX.Element {
   const {pathname } = useLocation();
   const currentRoute = pathname as AppRoute;
 
   return (
-    <div className={getClassNameLayout(currentRoute)}>
+    <div className={getClassNameLayout(currentRoute, isNotFound)}>
       <Header
         isRootRoute={currentRoute === AppRoute.Root}
         isRenderUser={!(currentRoute === AppRoute.Login)}
-        authStatus={getAuthorizationStatus()}
+        authStatus={authorizationStatus}
       />
       <Outlet />
-      {isRenderFooter(currentRoute) && <Footer />}
+      {isRenderFooter(currentRoute, isNotFound) && <Footer />}
     </div>
   );
 }
