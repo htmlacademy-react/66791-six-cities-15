@@ -11,13 +11,15 @@ type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
   offers: OffersType[];
   reviews: ReviewsType;
+  setNotFound: (flag: boolean) => void;
 }
 
-function OfferScreen({authorizationStatus, offers, reviews}: OfferScreenProps): JSX.Element {
+function OfferScreen({authorizationStatus, offers, reviews, setNotFound}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
   const currentOffer = offers.find((offer: OffersType) => offer.id === id);
 
   if (!currentOffer) {
+    setNotFound(true);
     return <NothingFoundScreen state="offer" />;
   }
 

@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {Route, Routes, BrowserRouter} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import Layout from '../layout';
@@ -19,6 +20,9 @@ type AppProps = {
 }
 
 function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
+  const [isNotFound, setIsNotFound] = useState(false);
+  const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -29,7 +33,7 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
             element={
               <Layout
                 authorizationStatus={authStatus}
-                offers={offers}
+                isNotFound={isNotFound}
               />
             }
           >
@@ -49,6 +53,7 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
                   authorizationStatus={authStatus}
                   offers={offers}
                   reviews={reviews}
+                  setNotFound={setNotFoundFlag}
                 />
               }
             />
@@ -66,6 +71,7 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
                 <PrivateRoute authorizationStatus={authStatus}>
                   <FavoritesScreen
                     offers={offers.filter((offer) => offer.isFavorite)}
+                    setNotFound={setNotFoundFlag}
                   />
                 </PrivateRoute>
               }

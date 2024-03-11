@@ -5,10 +5,12 @@ import {OffersType} from '../../types';
 
 type FavoritesScreenProps = {
   offers: OffersType[];
+  setNotFound: (flag: boolean) => void;
 }
 
-function FavoritesScreen({offers}: FavoritesScreenProps): JSX.Element {
+function FavoritesScreen({offers, setNotFound}: FavoritesScreenProps): JSX.Element {
   if (offers.length === 0) {
+    setNotFound(true);
     return (<NothingFoundScreen state="favorites" />);
   }
 
