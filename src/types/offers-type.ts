@@ -1,3 +1,11 @@
+import {CityType} from './city-type';
+
+export type LocationType = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
 export type UserType = {
   isPro: boolean;
   name: string;
@@ -11,6 +19,8 @@ export type OffersType = {
   type: string;
   price: number;
   previewImage: string;
+  city: CityType;
+  location: LocationType;
   images: string[];
   goods: string[];
   host: UserType;
