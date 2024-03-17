@@ -10,16 +10,17 @@ import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {OffersType, ReviewsType} from '../../types';
+import {OffersType, ReviewsType, CityType} from '../../types';
 
 type AppProps = {
   authStatus: AuthorizationStatus;
   cities: string[];
   offers: OffersType[];
   reviews: ReviewsType;
+  city: CityType;
 }
 
-function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
+function App({authStatus, cities, offers, reviews, city}: AppProps): JSX.Element {
   const [isNotFound, setIsNotFound] = useState(false);
   const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
 
@@ -42,6 +43,7 @@ function App({authStatus, cities, offers, reviews}: AppProps): JSX.Element {
               element={
                 <HomeScreen
                   cities={cities}
+                  city={city}
                   offers={offers}
                 />
               }

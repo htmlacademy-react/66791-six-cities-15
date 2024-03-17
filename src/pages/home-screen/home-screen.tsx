@@ -4,14 +4,19 @@ import Map from '../../components/common/map';
 import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
-import {OffersType} from '../../types';
+import {OffersType, CityType} from '../../types';
+import {useState} from 'react';
 
 type HomeScreenProps = {
   cities: string[];
+  city: CityType;
   offers: OffersType[];
 }
 
-function HomeScreen({cities, offers}: HomeScreenProps): JSX.Element {
+function HomeScreen({cities, city, offers}: HomeScreenProps): JSX.Element {
+  const [activePlaceCardId, setActivePlaceCardId] = useState('');
+
+  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
   const numberOffers = offers.length;
 
   return (
@@ -28,10 +33,21 @@ function HomeScreen({cities, offers}: HomeScreenProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <PlacesFound numberOffers={numberOffers} />
               <PlacesSorting />
-              <PlacesList offers={offers} />
+              <PlacesList
+                offers={offers}
+                hoverPlaceCard={hoverPlaceCardHandle}
+              />
             </section>
             <div className="cities__right-section">
-              <Map isMainMap />
+              <Map
+                city={city}
+                points={offers.map((offer: OffersType) => ({
+                  id: offer.id,
+                  location: offer.location
+                }))}
+                selectedPointId={activePlaceCardId}
+                isMainMap
+              />
             </div>
           </div>
         </div>
