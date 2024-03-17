@@ -11,7 +11,9 @@ type FavoritesScreenProps = {
 function FavoritesScreen({offers, setNotFound}: FavoritesScreenProps): JSX.Element {
   if (offers.length === 0) {
     setNotFound(true);
-    return (<NothingFoundScreen state="favorites" />);
+    return <NothingFoundScreen state="favorites" />;
+  } else {
+    setNotFound(false);
   }
 
   return (

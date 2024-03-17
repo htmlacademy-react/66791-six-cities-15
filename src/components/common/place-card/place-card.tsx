@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {OffersType} from '../../../types';
 import {AppRoute, NUMBER_STARS} from '../../../const';
+import {firstLetterToUppercase} from '../../../utils';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
@@ -97,7 +98,7 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
             {title}
           </Link>
         </h2>
-        <p className="place-card__type">{type.charAt(0).toUpperCase() + type.slice(1)}</p>
+        <p className="place-card__type">{firstLetterToUppercase(type)}</p>
       </div>
     </article>
   );

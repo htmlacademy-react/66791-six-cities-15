@@ -1,3 +1,4 @@
+import {cityMocks} from './city-mocks';
 import {OffersType} from '../types';
 
 export const offersMocks: OffersType[] = [
@@ -8,6 +9,12 @@ export const offersMocks: OffersType[] = [
     type: 'house',
     price: 470,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
@@ -41,6 +48,12 @@ export const offersMocks: OffersType[] = [
     type: 'hotel',
     price: 236,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
@@ -77,6 +90,12 @@ export const offersMocks: OffersType[] = [
     type: 'house',
     price: 801,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/15.jpg',
@@ -110,6 +129,12 @@ export const offersMocks: OffersType[] = [
     type: 'room',
     price: 293,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
@@ -146,6 +171,12 @@ export const offersMocks: OffersType[] = [
     type: 'hotel',
     price: 147,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.37454,
+      longitude: 4.881976,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
@@ -179,6 +210,12 @@ export const offersMocks: OffersType[] = [
     type: 'room',
     price: 285,
     previewImage: 'https://15.design.htmlacademy.pro/static/hotel/18.jpg',
+    city: cityMocks,
+    location: {
+      latitude: 52.367540000000005,
+      longitude: 4.883976,
+      zoom: 16
+    },
     images: [
       'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
       'https://15.design.htmlacademy.pro/static/hotel/17.jpg',

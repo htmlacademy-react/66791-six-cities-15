@@ -21,6 +21,8 @@ function OfferScreen({authorizationStatus, offers, reviews, setNotFound}: OfferS
   if (!currentOffer) {
     setNotFound(true);
     return <NothingFoundScreen state="offer" />;
+  } else {
+    setNotFound(false);
   }
 
   return (
