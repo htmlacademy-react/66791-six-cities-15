@@ -3,10 +3,9 @@ import {OffersType} from '../../../../types';
 
 type NearPlacesProps = {
   offers: OffersType[];
-  hoverPlaceCard: (offerId: string) => void;
 }
 
-function NearPlaces({offers, hoverPlaceCard}: NearPlacesProps): JSX.Element {
+function NearPlaces({offers}: NearPlacesProps): JSX.Element {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">
@@ -17,7 +16,6 @@ function NearPlaces({offers, hoverPlaceCard}: NearPlacesProps): JSX.Element {
           <PlaceCard
             isNearPlace
             key={offer.id}
-            hoverPlaceCard={hoverPlaceCard}
             {...offer}
           />
         ))}

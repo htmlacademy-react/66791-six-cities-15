@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
@@ -21,20 +20,20 @@ type OfferScreenProps = {
 const NUMBER_OFFERS = 3;
 
 function OfferScreen({authorizationStatus, city, offers, reviews, setNotFound}: OfferScreenProps): JSX.Element {
-  const [activePlaceCardId, setActivePlaceCardId] = useState('');
-
-  const {id} = useParams();
+  const {id = ''} = useParams();
   const currentOffer = offers.find((offer: OffersType) => offer.id === id);
   const currentOfferReviews = id ? reviews[id] : [];
   const nearOffers = offers.slice(0, NUMBER_OFFERS);
-
-  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
+  let nearOffersWithCurrentOffer: OffersType[] = [];
 
   if (!currentOffer) {
     setNotFound(true);
+
     return <NothingFoundScreen state="offer" />;
   } else {
     setNotFound(false);
+
+    nearOffersWithCurrentOffer = [...nearOffers, currentOffer];
   }
 
   return (
@@ -179,15 +178,12 @@ function OfferScreen({authorizationStatus, city, offers, reviews, setNotFound}: 
           </div>
           <Map
             city={city}
-            points={getOffersLocation(nearOffers)}
-            selectedPointId={activePlaceCardId}
+            points={getOffersLocation(nearOffersWithCurrentOffer)}
+            selectedPointId={id}
           />
         </section>
         <div className="container">
-          <NearPlaces
-            offers={nearOffers}
-            hoverPlaceCard={hoverPlaceCardHandle}
-          />
+          <NearPlaces offers={nearOffers} />
         </div>
       </main>
     </>
