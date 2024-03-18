@@ -1,11 +1,12 @@
+import {useState} from 'react';
 import Meta from '../../components/common/meta';
 import PlacesList from './components/places-list';
 import Map from '../../components/common/map';
 import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
+import {getOffersLocation} from '../../utils';
 import {OffersType, CityType} from '../../types';
-import {useState} from 'react';
 
 type HomeScreenProps = {
   cities: string[];
@@ -41,10 +42,7 @@ function HomeScreen({cities, city, offers}: HomeScreenProps): JSX.Element {
             <div className="cities__right-section">
               <Map
                 city={city}
-                points={offers.map((offer: OffersType) => ({
-                  id: offer.id,
-                  location: offer.location
-                }))}
+                points={getOffersLocation(offers)}
                 selectedPointId={activePlaceCardId}
                 isMainMap
               />

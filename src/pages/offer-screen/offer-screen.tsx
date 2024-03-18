@@ -6,6 +6,7 @@ import ReviewsForm from './components/reviews-form';
 import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 import {AuthorizationStatus} from '../../const';
+import {getOffersLocation} from '../../utils';
 import {OffersType, ReviewsType, CityType} from '../../types';
 
 type OfferScreenProps = {
@@ -206,10 +207,7 @@ function OfferScreen({authorizationStatus, city, offers, reviews, setNotFound}: 
           </div>
           <Map
             city={city}
-            points={nearOffers.map((offer: OffersType) => ({
-              id: offer.id,
-              location: offer.location
-            }))}
+            points={getOffersLocation(nearOffers)}
             selectedPointId={activePlaceCardId}
           />
         </section>
