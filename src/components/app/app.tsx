@@ -53,6 +53,7 @@ function App({authStatus, cities, offers, reviews, city}: AppProps): JSX.Element
               element={
                 <OfferScreen
                   authorizationStatus={authStatus}
+                  city={city}
                   offers={offers}
                   reviews={reviews}
                   setNotFound={setNotFoundFlag}

@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
@@ -5,18 +6,25 @@ import ReviewsForm from './components/reviews-form';
 import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 import {AuthorizationStatus} from '../../const';
-import {OffersType, ReviewsType} from '../../types';
+import {OffersType, ReviewsType, CityType} from '../../types';
 
 type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
+  city: CityType;
   offers: OffersType[];
   reviews: ReviewsType;
   setNotFound: (flag: boolean) => void;
 }
 
-function OfferScreen({authorizationStatus, offers, reviews, setNotFound}: OfferScreenProps): JSX.Element {
+const NUMBER_OFFERS = 3;
+
+function OfferScreen({authorizationStatus, city, offers, reviews, setNotFound}: OfferScreenProps): JSX.Element {
+  const [activePlaceCardId, setActivePlaceCardId] = useState('');
+
   const {id} = useParams();
   const currentOffer = offers.find((offer: OffersType) => offer.id === id);
+  const nearOffers = offers.slice(0, NUMBER_OFFERS);
+  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
 
   if (!currentOffer) {
     setNotFound(true);
@@ -196,10 +204,20 @@ function OfferScreen({authorizationStatus, offers, reviews, setNotFound}: OfferS
               </section>
             </div>
           </div>
-          <Map/>
+          <Map
+            city={city}
+            points={nearOffers.map((offer: OffersType) => ({
+              id: offer.id,
+              location: offer.location
+            }))}
+            selectedPointId={activePlaceCardId}
+          />
         </section>
         <div className="container">
-          <NearPlaces offers={offers} />
+          <NearPlaces
+            offers={nearOffers}
+            hoverPlaceCard={hoverPlaceCardHandle}
+          />
         </div>
       </main>
     </>
