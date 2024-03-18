@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {OffersType} from '../../../types';
-import {AppRoute, NUMBER_STARS} from '../../../const';
-import {firstLetterToUppercase} from '../../../utils';
+import {AppRoute} from '../../../const';
+import {firstLetterToUppercase, percentageStars} from '../../../utils';
 
 type PlaceCardProps = {
   isNearPlace?: boolean;
@@ -89,7 +89,7 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 100 / NUMBER_STARS}%`}}/>
+            <span style={{width: `${percentageStars(rating)}%`}}/>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
