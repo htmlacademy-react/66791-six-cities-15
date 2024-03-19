@@ -237,8 +237,8 @@ export const offersMocks: OffersType[] = [
       'Kitchen'
     ],
     host: {
-      isPro: true,
-      name: 'Angelina',
+      isPro: false,
+      name: 'Antonio',
       avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
     },
     isPremium: true,
