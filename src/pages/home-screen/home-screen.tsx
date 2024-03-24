@@ -5,6 +5,8 @@ import Map from '../../components/common/map';
 import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {changeCity, renderOffers} from '../../store/action';
 import {getOffersLocation} from '../../utils';
 import {OffersType, CityType} from '../../types';
 
@@ -15,10 +17,19 @@ type HomeScreenProps = {
 }
 
 function HomeScreen({cities, city, offers}: HomeScreenProps): JSX.Element {
+  const currentCity = useAppSelector((state) => state.currentCity);
+
+  const dispatch = useAppDispatch();
+
   const [activePlaceCardId, setActivePlaceCardId] = useState('');
 
-  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
   const numberOffers = offers.length;
+
+  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
+  const clickChangeCityHandle = (changedCity: string): void => {
+    dispatch(changeCity(changedCity));
+    dispatch(renderOffers());
+  };
 
   return (
     <>
@@ -26,7 +37,11 @@ function HomeScreen({cities, city, offers}: HomeScreenProps): JSX.Element {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <Tabs cities={cities} />
+        <Tabs
+          cities={cities}
+          currentCity={currentCity}
+          clickChangeCityHandle={clickChangeCityHandle}
+        />
 
         <div className="cities">
           <div className="cities__places-container container">
