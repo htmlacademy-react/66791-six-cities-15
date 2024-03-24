@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {useAppSelector} from '../../../hooks';
 import {AppRoute} from '../../../const';
 
 type LogoProps = {
@@ -11,13 +12,15 @@ type LogoLinkProps = LogoProps & {
 }
 
 function LogoLink ({isRootRoute, isFooterLogo, children}: LogoLinkProps): JSX.Element {
+  const currentCity = useAppSelector((state) => state.currentCity);
+
   const logoLinkClassName = isFooterLogo ? 'footer__logo-link' : 'header__logo-link';
 
   return (
     isRootRoute ? (
       <a className={`${logoLinkClassName} header__logo-link--active`}>{children}</a>
     ) : (
-      <Link className={logoLinkClassName} to={AppRoute.Root}>{children}</Link>
+      <Link className={logoLinkClassName} to={`${AppRoute.Root}?tab=${currentCity.toLowerCase()}`}>{children}</Link>
     )
   );
 }

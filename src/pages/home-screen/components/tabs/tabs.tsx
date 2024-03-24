@@ -1,4 +1,5 @@
-import {useSearchParams} from 'react-router-dom';
+import {useEffect} from 'react';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import LocationsItem from '../../../../components/ui/locations-item/locations-item';
 
 type TabsProps = {
@@ -9,7 +10,16 @@ type TabsProps = {
 
 function Tabs({currentCity, cities, clickChangeCityHandle}: TabsProps): JSX.Element {
   const [searchParams] = useSearchParams();
-  const currentTab = searchParams.get('tab') || currentCity.toLowerCase();
+  const navigate = useNavigate();
+
+  const searchParamTab = searchParams.get('tab');
+  const currentTab = searchParamTab || currentCity.toLowerCase();
+
+  useEffect(() => {
+    if (!searchParamTab) {
+      navigate(`?tab=${currentTab}`);
+    }
+  }, [currentTab, navigate, searchParamTab]);
 
   return (
     <div className="tabs">
