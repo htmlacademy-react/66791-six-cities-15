@@ -1,14 +1,12 @@
-import {useSearchParams} from 'react-router-dom';
 import LocationsItem from '../../../../components/ui/locations-item/locations-item';
 
 type TabsProps = {
+  currentCity: string;
   cities: string[];
+  clickChangeCityHandle: (changedCity: string) => void;
 }
 
-function Tabs({cities}: TabsProps): JSX.Element {
-  const [searchParams] = useSearchParams();
-  const currentTab = searchParams.get('tab') || 'amsterdam';
-
+function Tabs({currentCity, cities, clickChangeCityHandle}: TabsProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -16,8 +14,9 @@ function Tabs({cities}: TabsProps): JSX.Element {
           {cities.map((city) => (
             <LocationsItem
               key={city}
-              isActiveCity={city.toLowerCase() === currentTab}
+              isActiveCity={city.toLowerCase() === currentCity}
               city={city}
+              clickChangeCityHandle={clickChangeCityHandle}
               isListItem
             />
           ))}

@@ -132,5 +132,7 @@ export const reviewsMocks: ReviewsType = {
         isPro: true
       }
     }
-  ]
+  ],
+  '3d36c8ab-33ef-4433-818b-6e2140122bf9': [],
+  '1720a3ec-0ee2-4e17-991f-c6783b3acaa1': []
 };

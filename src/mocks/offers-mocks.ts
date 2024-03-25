@@ -246,5 +246,96 @@ export const offersMocks: OffersType[] = [
     rating: 4.5,
     bedrooms: 1,
     maxAdults: 2
+  },
+  {
+    id: '3d36c8ab-33ef-4433-818b-6e2140122bf9',
+    title: 'Wood and stone place',
+    description: 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
+    type: 'room',
+    price: 115,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/19.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/17.jpg'
+    ],
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 50.854557,
+      longitude: 4.364697,
+      zoom: 16
+    },
+    goods: [
+      'Wi-Fi',
+      'Dishwasher',
+      'Fridge'
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
+    },
+    isPremium: false,
+    isFavorite: false,
+    rating: 2.5,
+    bedrooms: 1,
+    maxAdults: 3
+  },
+  {
+    id: '1720a3ec-0ee2-4e17-991f-c6783b3acaa1',
+    title: 'Wood and stone place',
+    description: 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
+    type: 'apartment',
+    price: 130,
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+    images: [
+      'https://15.design.htmlacademy.pro/static/hotel/4.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/20.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+      'https://15.design.htmlacademy.pro/static/hotel/18.jpg'
+    ],
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 50.867557,
+      longitude: 4.371696999999999,
+      zoom: 16
+    },
+    goods: [
+      'Towels',
+      'Coffee machine',
+      'Washing machine',
+      'Air conditioning',
+      'Breakfast',
+      'Dishwasher'
+    ],
+    host: {
+      isPro: true,
+      name: 'Angelina',
+      avatarUrl: 'https://15.design.htmlacademy.pro/static/host/avatar-angelina.jpg'
+    },
+    isPremium: true,
+    isFavorite: false,
+    rating: 1.9,
+    bedrooms: 5,
+    maxAdults: 7
   }
 ];

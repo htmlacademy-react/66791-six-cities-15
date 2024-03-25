@@ -38,16 +38,7 @@ function App({authStatus, cities, offers, reviews, city}: AppProps): JSX.Element
               />
             }
           >
-            <Route
-              index
-              element={
-                <HomeScreen
-                  cities={cities}
-                  city={city}
-                  offers={offers}
-                />
-              }
-            />
+            <Route index element={<HomeScreen cities={cities} />} />
             <Route
               path={AppRoute.Offer}
               element={
