@@ -9,15 +9,14 @@ import PlacesSorting from './components/places-sorting';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity, renderOffers} from '../../store/action';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
-import {CityType} from '../../types';
 
 type HomeScreenProps = {
   cities: string[];
-  city: CityType;
 }
 
-function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
+function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
+  const currentCityWithLocation = useAppSelector((state) => state.currentCityWithLocation);
   const offers = useAppSelector((state) => state.offersForCurrentCity);
 
   const dispatch = useAppDispatch();
@@ -51,7 +50,13 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
 
   return (
     <>
-      <Meta titleText={`6/Cities. ${numberOffers} places to stay in Amsterdam`} />
+      <Meta
+        titleText={
+          `6/Cities. ${isOffers
+            ? `${numberOffers} places to stay in ${firstLetterToUppercase(currentTab)}`
+            : 'No places to stay available'}`
+        }
+      />
 
       <main className={`page__main page__main--index ${!isOffers ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
@@ -66,7 +71,7 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
             {isOffers && (
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <PlacesFound numberOffers={numberOffers}/>
+                <PlacesFound numberOffers={numberOffers} city={currentCity} />
                 <PlacesSorting/>
                 <PlacesList
                   offers={offers}
@@ -87,7 +92,7 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
             <div className="cities__right-section">
               {isOffers && (
                 <Map
-                  city={city}
+                  city={currentCityWithLocation}
                   points={getOffersLocation(offers)}
                   selectedPointId={activePlaceCardId}
                   isMainMap
