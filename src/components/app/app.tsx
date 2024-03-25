@@ -44,7 +44,6 @@ function App({authStatus, cities, offers, reviews, city}: AppProps): JSX.Element
                 <HomeScreen
                   cities={cities}
                   city={city}
-                  offers={offers}
                 />
               }
             />
