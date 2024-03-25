@@ -1,4 +1,5 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useSearchParams, useNavigate} from 'react-router-dom';
 import Meta from '../../components/common/meta';
 import PlacesList from './components/places-list';
 import Map from '../../components/common/map';
@@ -7,7 +8,7 @@ import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity, renderOffers} from '../../store/action';
-import {getOffersLocation} from '../../utils';
+import {getOffersLocation, firstLetterToUppercase} from '../../utils';
 import {CityType} from '../../types';
 
 type HomeScreenProps = {
@@ -23,6 +24,11 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
 
   const [activePlaceCardId, setActivePlaceCardId] = useState('');
 
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const searchParamTab = searchParams.get('tab');
+  const currentTab = searchParamTab || currentCity.toLowerCase();
   const numberOffers = offers.length;
   const isOffers = numberOffers > 0;
 
@@ -32,6 +38,17 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
     dispatch(renderOffers());
   };
 
+  useEffect(() => {
+    dispatch(changeCity(firstLetterToUppercase(currentTab)));
+    dispatch(renderOffers());
+  }, [currentTab, dispatch]);
+
+  useEffect(() => {
+    if (!searchParamTab) {
+      navigate(`?tab=${currentTab}`);
+    }
+  }, [currentTab, navigate, searchParamTab]);
+
   return (
     <>
       <Meta titleText={`6/Cities. ${numberOffers} places to stay in Amsterdam`} />
@@ -40,7 +57,7 @@ function HomeScreen({cities, city}: HomeScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <Tabs
           cities={cities}
-          currentCity={currentCity}
+          currentCity={currentTab}
           clickChangeCityHandle={clickChangeCityHandle}
         />
 
