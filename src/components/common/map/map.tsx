@@ -53,6 +53,12 @@ function Map({city, points, selectedPointId, isMainMap}: MapProps): JSX.Element 
     }
   }, [map, points, selectedPointId]);
 
+  useEffect(() => {
+    if (map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  }, [city, map]);
+
   return (
     <section
       ref={mapRef}
