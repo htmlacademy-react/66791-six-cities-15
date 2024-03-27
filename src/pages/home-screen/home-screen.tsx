@@ -17,7 +17,7 @@ type HomeScreenProps = {
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
   const currentCityWithLocation = useAppSelector((state) => state.currentCityWithLocation);
-  const offers = useAppSelector((state) => state.offersForCurrentCity);
+  const offers = useAppSelector((state) => state.offersForCurrentCitySort);
 
   const dispatch = useAppDispatch();
 
