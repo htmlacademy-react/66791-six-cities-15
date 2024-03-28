@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import {useAppSelector, useAppDispatch} from '../../../../hooks';
-import {changeSortType, sortPopular, sortPriceLowToHigh, sortPriceHighToLow, sortTopRatedFirst} from '../../../../store/action';
+import {changeSortType} from '../../../../store/action';
 import {SortingOption} from '../../../../const';
 
 function PlacesSorting(): JSX.Element {
@@ -16,20 +16,6 @@ function PlacesSorting(): JSX.Element {
   const clickPlacesOptionsOpenHandle = (isOpen: boolean): void => setIsPlacesOptionsOpen(isOpen);
   const clickSortingHandle = (type: string): void => {
     dispatch(changeSortType(type));
-
-    switch (type) {
-      case 'SortPriceLowToHigh':
-        dispatch(sortPriceLowToHigh());
-        break;
-      case 'SortPriceHighToLow':
-        dispatch(sortPriceHighToLow());
-        break;
-      case 'SortTopRatedFirst':
-        dispatch(sortTopRatedFirst());
-        break;
-      default:
-        dispatch(sortPopular());
-    }
 
     setIsPlacesOptionsOpen(false);
   };
