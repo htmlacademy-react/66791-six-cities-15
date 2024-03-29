@@ -9,9 +9,10 @@ import PlacesSorting from './components/places-sorting';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/action';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
+import {CitiesType, CityNameType} from '../../types';
 
 type HomeScreenProps = {
-  cities: string[];
+  cities: CitiesType;
 }
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
@@ -36,12 +37,12 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
     : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
 
   const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
-  const clickChangeCityHandle = (changedCity: string): void => {
+  const clickChangeCityHandle = (changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   };
 
   useEffect(() => {
-    dispatch(changeCity(firstLetterToUppercase(currentTab)));
+    dispatch(changeCity(firstLetterToUppercase(currentTab) as CityNameType));
   }, [currentTab, dispatch]);
 
   useEffect(() => {

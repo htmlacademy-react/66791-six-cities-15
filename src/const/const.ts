@@ -1,11 +1,11 @@
-export const CITIES: string[] = [
+export const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',
   'Amsterdam',
   'Hamburg',
   'Dusseldorf'
-];
+] as const;
 
 export enum AppRoute {
   Root = '/',

@@ -1,9 +1,10 @@
 import LocationsItem from '../../../../components/ui/locations-item/locations-item';
+import {CitiesType, CityNameType} from '../../../../types';
 
 type TabsProps = {
   currentCity: string;
-  cities: string[];
-  clickChangeCityHandle: (changedCity: string) => void;
+  cities: CitiesType;
+  clickChangeCityHandle: (changedCity: CityNameType) => void;
 }
 
 function Tabs({currentCity, cities, clickChangeCityHandle}: TabsProps): JSX.Element {

@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom';
+import {CityNameType} from '../../../types';
 
 type LocationsItemProps = {
-  city: string;
+  city: CityNameType;
   isListItem?: boolean;
   isActiveCity?: boolean;
-  clickChangeCityHandle: (changedCity: string) => void;
+  clickChangeCityHandle: (changedCity: CityNameType) => void;
 }
 
 function LocationsItem({isListItem = false, isActiveCity = false, city, clickChangeCityHandle}: LocationsItemProps): JSX.Element {
