@@ -1,29 +1,19 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, renderOffers} from './action';
-import {OffersType, CityType} from '../types';
+import {changeCity, changeSortType} from './action';
+import {OffersType} from '../types';
+import {CITIES} from '../const';
 import {offersMocks} from '../mocks';
 
 type initialStateType = {
   currentCity: string;
-  currentCityWithLocation: CityType;
   offers: OffersType[];
-  offersForCurrentCity: OffersType[];
+  activeSortType: string;
 }
 
-const initialCurrentCityWithLocation: CityType = {
-  name: '',
-  location: {
-    latitude: 0,
-    longitude: 0,
-    zoom: 0
-  }
-};
-
 const initialState: initialStateType = {
-  currentCity: 'Paris',
-  currentCityWithLocation: initialCurrentCityWithLocation,
+  currentCity: CITIES[0],
   offers: offersMocks,
-  offersForCurrentCity: []
+  activeSortType: 'SortPopular'
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -31,13 +21,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.currentCity = action.payload;
     })
-    .addCase(renderOffers, (state) => {
-      state.offersForCurrentCity = state.offers.filter(
-        (offer) => offer.city.name === state.currentCity
-      );
-      state.currentCityWithLocation = state.offersForCurrentCity.length > 0
-        ? state.offersForCurrentCity[0].city
-        : initialCurrentCityWithLocation;
+    .addCase(changeSortType, (state, action) => {
+      state.activeSortType = action.payload;
     });
 });
 

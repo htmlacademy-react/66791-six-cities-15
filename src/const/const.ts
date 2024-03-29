@@ -1,11 +1,11 @@
-export const CITIES: string[] = [
+export const CITIES = [
   'Paris',
   'Cologne',
   'Brussels',
   'Amsterdam',
   'Hamburg',
   'Dusseldorf'
-];
+] as const;
 
 export enum AppRoute {
   Root = '/',
@@ -33,3 +33,10 @@ export enum StarsTitle {
 export const URL_MARKER_DEFAULT = './img/pin.svg';
 
 export const URL_MARKER_CURRENT = './img/pin-active.svg';
+
+export enum SortingOption {
+  SortPopular = 'Popular',
+  SortPriceLowToHigh = 'Price: low to high',
+  SortPriceHighToLow = 'Price: high to low',
+  SortTopRatedFirst = 'Top rated first'
+}

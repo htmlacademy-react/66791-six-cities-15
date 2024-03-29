@@ -7,17 +7,19 @@ import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeCity, renderOffers} from '../../store/action';
+import {changeCity} from '../../store/action';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
+import {CitiesType, CityNameType} from '../../types';
 
 type HomeScreenProps = {
-  cities: string[];
+  cities: CitiesType;
 }
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
-  const currentCityWithLocation = useAppSelector((state) => state.currentCityWithLocation);
-  const offers = useAppSelector((state) => state.offersForCurrentCity);
+  const offers = useAppSelector((state) => state.offers).filter(
+    (offer) => offer.city.name === currentCity
+  );
 
   const dispatch = useAppDispatch();
 
@@ -30,16 +32,17 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentTab = searchParamTab || currentCity.toLowerCase();
   const numberOffers = offers.length;
   const isOffers = numberOffers > 0;
+  const currentCityWithLocation = isOffers
+    ? offers[0].city
+    : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
 
   const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
-  const clickChangeCityHandle = (changedCity: string): void => {
+  const clickChangeCityHandle = (changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
-    dispatch(renderOffers());
   };
 
   useEffect(() => {
-    dispatch(changeCity(firstLetterToUppercase(currentTab)));
-    dispatch(renderOffers());
+    dispatch(changeCity(firstLetterToUppercase(currentTab) as CityNameType));
   }, [currentTab, dispatch]);
 
   useEffect(() => {
@@ -72,7 +75,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <PlacesFound numberOffers={numberOffers} city={currentCity} />
-                <PlacesSorting/>
+                <PlacesSorting />
                 <PlacesList
                   offers={offers}
                   hoverPlaceCard={hoverPlaceCardHandle}

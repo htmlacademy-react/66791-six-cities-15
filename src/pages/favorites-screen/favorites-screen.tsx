@@ -3,7 +3,7 @@ import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
 import {useAppDispatch} from '../../hooks';
 import {OffersType} from '../../types';
-import {changeCity, renderOffers} from '../../store/action';
+import {changeCity} from '../../store/action';
 
 type FavoritesScreenProps = {
   offers: OffersType[];
@@ -22,7 +22,6 @@ function FavoritesScreen({offers, setNotFound}: FavoritesScreenProps): JSX.Eleme
 
   const clickChangeCityHandle = (changedCity: string): void => {
     dispatch(changeCity(changedCity));
-    dispatch(renderOffers());
   };
 
   return (
