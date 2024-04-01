@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import {useAppSelector, useAppDispatch} from '../../../../hooks';
 import {changeSortType} from '../../../../store/action';
+import {SortOffersType} from '../../../../types';
 import {SortingOption} from '../../../../const';
 
 function PlacesSorting(): JSX.Element {
@@ -14,7 +15,7 @@ function PlacesSorting(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const clickPlacesOptionsOpenHandle = (isOpen: boolean): void => setIsPlacesOptionsOpen(isOpen);
-  const clickSortingHandle = (type: string): void => {
+  const clickSortingHandle = (type: SortOffersType): void => {
     dispatch(changeSortType(type));
 
     setIsPlacesOptionsOpen(false);
@@ -58,7 +59,7 @@ function PlacesSorting(): JSX.Element {
         tabIndex={0}
         onClick={() => clickPlacesOptionsOpenHandle(!isPlacesOptionsOpen)}
       >
-        {SortingOption[activeSortType as keyof typeof SortingOption]}
+        {SortingOption[activeSortType]}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
@@ -72,9 +73,9 @@ function PlacesSorting(): JSX.Element {
             key={option}
             className={`places__option ${option === activeSortType ? 'places__option--active' : ''}`}
             tabIndex={0}
-            onClick={() => clickSortingHandle(option)}
+            onClick={() => clickSortingHandle(option as SortOffersType)}
           >
-            {SortingOption[option as keyof typeof SortingOption]}
+            {SortingOption[option as SortOffersType]}
           </li>
         ))}
       </ul>
