@@ -9,12 +9,12 @@ import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 import {AuthorizationStatus} from '../../const';
 import {getOffersLocation, percentageStars, firstLetterToUppercase} from '../../utils';
-import {OffersType, ReviewsType, CityType} from '../../types';
+import {OfferType, ReviewsType, CityType} from '../../types';
 
 type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
   city: CityType;
-  offers: OffersType[];
+  offers: OfferType[];
   reviews: ReviewsType;
   setNotFound: (flag: boolean) => void;
 }
@@ -23,10 +23,10 @@ const NUMBER_OFFERS = 3;
 
 function OfferScreen({authorizationStatus, city, offers, reviews, setNotFound}: OfferScreenProps): JSX.Element {
   const {id = ''} = useParams();
-  const currentOffer = offers.find((offer: OffersType) => offer.id === id);
+  const currentOffer = offers.find((offer: OfferType) => offer.id === id);
   const currentOfferReviews = id ? reviews[id] : [];
   const nearOffers = offers.slice(0, NUMBER_OFFERS);
-  let nearOffersWithCurrentOffer: OffersType[] = [];
+  let nearOffersWithCurrentOffer: OfferType[] = [];
 
   if (!currentOffer) {
     setNotFound(true);

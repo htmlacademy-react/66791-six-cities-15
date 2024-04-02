@@ -6,6 +6,7 @@ import Map from '../../components/common/map';
 import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
+import Spinner from '../../components/ui/spinner';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/action';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
@@ -17,6 +18,7 @@ type HomeScreenProps = {
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
   const offers = useAppSelector((state) => state.offers).filter(
     (offer) => offer.city.name === currentCity
   );
@@ -61,50 +63,53 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
         }
       />
 
-      <main className={`page__main page__main--index ${!isOffers ? 'page__main--index-empty' : ''}`}>
-        <h1 className="visually-hidden">Cities</h1>
-        <Tabs
-          cities={cities}
-          currentCity={currentTab}
-          clickChangeCityHandle={clickChangeCityHandle}
-        />
+      {isOffersDataLoading && <Spinner />}
+      {!isOffersDataLoading && (
+        <main className={`page__main page__main--index ${!isOffers ? 'page__main--index-empty' : ''}`}>
+          <h1 className="visually-hidden">Cities</h1>
+          <Tabs
+            cities={cities}
+            currentCity={currentTab}
+            clickChangeCityHandle={clickChangeCityHandle}
+          />
 
-        <div className="cities">
-          <div className={`cities__places-container ${!isOffers ? 'cities__places-container--empty' : ''} container`}>
-            {isOffers && (
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <PlacesFound numberOffers={numberOffers} city={currentCity} />
-                <PlacesSorting />
-                <PlacesList
-                  offers={offers}
-                  hoverPlaceCard={hoverPlaceCardHandle}
-                />
-              </section>
-            )}
-            {!isOffers && (
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">
-                    We could not find any property available at the moment in {currentCity}
-                  </p>
-                </div>
-              </section>
-            )}
-            <div className="cities__right-section">
+          <div className="cities">
+            <div className={`cities__places-container ${!isOffers ? 'cities__places-container--empty' : ''} container`}>
               {isOffers && (
-                <Map
-                  city={currentCityWithLocation}
-                  points={getOffersLocation(offers)}
-                  selectedPointId={activePlaceCardId}
-                  isMainMap
-                />
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <PlacesFound numberOffers={numberOffers} city={currentCity}/>
+                  <PlacesSorting/>
+                  <PlacesList
+                    offers={offers}
+                    hoverPlaceCard={hoverPlaceCardHandle}
+                  />
+                </section>
               )}
+              {!isOffers && (
+                <section className="cities__no-places">
+                  <div className="cities__status-wrapper tabs__content">
+                    <b className="cities__status">No places to stay available</b>
+                    <p className="cities__status-description">
+                      We could not find any property available at the moment in {currentCity}
+                    </p>
+                  </div>
+                </section>
+              )}
+              <div className="cities__right-section">
+                {isOffers && (
+                  <Map
+                    city={currentCityWithLocation}
+                    points={getOffersLocation(offers)}
+                    selectedPointId={activePlaceCardId}
+                    isMainMap
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      )}
     </>
   );
 }
