@@ -1,7 +1,7 @@
 import {cityMocks} from './city-mocks';
-import {OffersType} from '../types';
+import {OfferType} from '../types';
 
-export const offersMocks: OffersType[] = [
+export const offersMocks: OfferType[] = [
   {
     id: 'b23206da-0873-4b14-87c2-cd5f47cb7cdb',
     title: 'The Pondhouse - A Magical Place',

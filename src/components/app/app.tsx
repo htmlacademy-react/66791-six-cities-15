@@ -11,11 +11,11 @@ import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
 import {AppRoute} from '../../const';
-import {OffersType, ReviewsType, CityType, CitiesType} from '../../types';
+import {ReviewsType, CityType, CitiesType, OfferType} from '../../types';
 
 type AppProps = {
   cities: CitiesType;
-  offers: OffersType[];
+  offers: OfferType[];
   reviews: ReviewsType;
   city: CityType;
 }

@@ -15,18 +15,30 @@ export type UserType = {
 export type OffersType = {
   id: string;
   title: string;
-  description: string;
   type: string;
   price: number;
   previewImage: string;
   city: CityType;
   location: LocationType;
-  images: string[];
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+}
+
+export type OfferType = OffersType & {
+  description: string;
+  bedrooms: number;
   goods: string[];
   host: UserType;
-  isPremium: boolean;
-  isFavorite: boolean;
-  rating: number;
-  bedrooms: number;
+  images: string[];
   maxAdults: number;
 }
+
+/*export type OfferType = Omit<OffersType, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: UserType;
+  images: string[];
+  maxAdults: number;
+}*/
