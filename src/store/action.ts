@@ -8,6 +8,8 @@ export const changeSortType = createAction<SortOffersType>('sort/changeType');
 
 export const loadOffers = createAction<OffersType[]>('data/loadOffers');
 
+export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setError = createAction<string | null>('service/setError');

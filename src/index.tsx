@@ -4,8 +4,12 @@ import {Provider} from 'react-redux';
 import App from './components/app';
 import ErrorMessage from './components/common/error-message';
 import {CITIES} from './const';
-import {getAuthorizationStatus, offersMocks, reviewsMocks, cityMocks} from './mocks';
+import {offersMocks, reviewsMocks, cityMocks} from './mocks';
 import {store} from './store';
+import {checkAuthAction, fetchOffersAction} from './store/api-actions';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +20,6 @@ root.render(
     <Provider store={store}>
       <ErrorMessage />
       <App
-        authStatus={getAuthorizationStatus()}
         cities={CITIES}
         offers={offersMocks}
         reviews={reviewsMocks}
