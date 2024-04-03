@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import Logo from '../../ui/logo';
+import {useAppSelector} from '../../../hooks';
 import {AuthorizationStatus, AppRoute} from '../../../const';
 
 type HeaderProps = {
@@ -9,6 +10,8 @@ type HeaderProps = {
 }
 
 function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Element {
+  const user = useAppSelector((state) => state.user);
+
   return (
     <header className="header">
       <div className="container">
@@ -24,11 +27,17 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                     className="header__nav-link header__nav-link--profile"
                     to={AppRoute.Favorites}
                   >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <div
+                      className="header__avatar-wrapper user__avatar-wrapper"
+                      style={{
+                        backgroundImage: `url(${user.avatarUrl})`,
+                        borderRadius: '50%'
+                      }}
+                    />
                     {authStatus === AuthorizationStatus.Auth ? (
                       <>
                         <span className="header__user-name user__name">
-                          Oliver.conner@gmail.com
+                          {user.email}
                         </span>
                         <span className="header__favorite-count">3</span>
                       </>
