@@ -18,10 +18,15 @@ function LoginScreen(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        login: loginRef.current.value,
-        password: passwordRef.current.value
-      }));
+      const loginValue = loginRef.current.value.trim();
+      const passValue = passwordRef.current.value.trim();
+
+      if (!!loginValue && !!passValue) {
+        dispatch(loginAction({
+          login: loginValue,
+          password: passValue
+        }));
+      }
     }
   };
 
