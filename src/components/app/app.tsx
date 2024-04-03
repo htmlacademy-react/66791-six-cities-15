@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Route, Routes, BrowserRouter} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {useAppSelector} from '../../hooks';
 import Layout from '../layout';
@@ -10,6 +10,8 @@ import OfferScreen from '../../pages/offer-screen';
 import NothingFoundScreen from '../../pages/nothing-found-screen';
 import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
+import HistoryRouter from '../history-route';
+import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
 import {ReviewsType, CityType, CitiesType, OfferType} from '../../types';
 
@@ -26,15 +28,9 @@ function App({cities, offers, reviews, city}: AppProps): JSX.Element {
   const [isNotFound, setIsNotFound] = useState(false);
   const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
 
-  /*if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
-    return (
-      <LoadingScreen />
-    );
-  }*/
-
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop />
         <Routes>
           <Route
@@ -81,7 +77,7 @@ function App({cities, offers, reviews, city}: AppProps): JSX.Element {
             <Route path="*" element={<NothingFoundScreen state="page" />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
