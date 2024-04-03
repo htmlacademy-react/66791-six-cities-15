@@ -84,5 +84,12 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(loadUser({
+      email: '',
+      token: '',
+      name: '',
+      avatarUrl: '',
+      isPro: false
+    }));
   },
 );
