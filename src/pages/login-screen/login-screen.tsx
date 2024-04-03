@@ -1,7 +1,18 @@
 import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {CityNameType} from '../../types';
+import {changeCity} from '../../store/action';
 
 function LoginScreen(): JSX.Element {
+  const currentCity = useAppSelector((state) => state.currentCity);
+
+  const dispatch = useAppDispatch();
+
+  const clickChangeCityHandle = (changedCity: CityNameType): void => {
+    dispatch(changeCity(changedCity));
+  };
+
   return (
     <>
       <Meta titleText="6/Cities. Authorization" />
@@ -37,7 +48,10 @@ function LoginScreen(): JSX.Element {
             </form>
           </section>
           <section className="locations locations--login locations--current">
-            <LocationsItem city="Amsterdam" />
+            <LocationsItem
+              city={currentCity}
+              clickChangeCityHandle={clickChangeCityHandle}
+            />
           </section>
         </div>
       </main>
