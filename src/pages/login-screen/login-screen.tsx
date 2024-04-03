@@ -1,11 +1,9 @@
 import {useRef, FormEvent} from 'react';
-import {useNavigate} from 'react-router-dom';
 import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/action';
 import {loginAction} from '../../store/api-actions';
-import {AppRoute} from '../../const';
 import {CityNameType} from '../../types';
 
 function LoginScreen(): JSX.Element {
@@ -15,7 +13,6 @@ function LoginScreen(): JSX.Element {
   const currentCity = useAppSelector((state) => state.currentCity);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const clickSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -66,7 +63,6 @@ function LoginScreen(): JSX.Element {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                onClick={() => navigate(AppRoute.Root)}
               >
                 Sign in
               </button>
