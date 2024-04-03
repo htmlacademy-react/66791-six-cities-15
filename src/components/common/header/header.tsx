@@ -1,9 +1,9 @@
 import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../ui/logo';
-import {useAppSelector, useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {logoutAction} from '../../../store/api-actions';
-import {AuthorizationStatus, AppRoute} from '../../../const';
+import {AppRoute, AuthorizationStatus} from '../../../const';
 
 type HeaderProps = {
   isRenderUser: boolean;
@@ -15,6 +15,8 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
   const user = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
+
+  const isAuth = authStatus === AuthorizationStatus.Auth;
 
   const clickLogoutHandle = (evt: MouseEvent) => {
     evt.preventDefault();
@@ -34,7 +36,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                 <li className="header__nav-item user">
                   <Link
                     className="header__nav-link header__nav-link--profile"
-                    to={AppRoute.Favorites}
+                    to={isAuth ? AppRoute.Favorites : AppRoute.Login}
                   >
                     <div
                       className="header__avatar-wrapper user__avatar-wrapper"
@@ -43,7 +45,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                         borderRadius: '50%'
                       }}
                     />
-                    {authStatus === AuthorizationStatus.Auth ? (
+                    {isAuth ? (
                       <>
                         <span className="header__user-name user__name">
                           {user.email}
@@ -54,7 +56,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
 
                   </Link>
                 </li>
-                {authStatus === AuthorizationStatus.Auth && (
+                {isAuth && (
                   <li className="header__nav-item">
                     <Link
                       className="header__nav-link"
