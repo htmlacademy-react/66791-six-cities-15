@@ -1,10 +1,10 @@
 import LocationsItem from '../../../../components/ui/locations-item';
 import PlaceCard from '../../../../components/common/place-card';
-import {OffersType} from '../../../../types';
+import {OffersType, CityNameType} from '../../../../types';
 
 type FavoritesLocationsItemProps = {
   offers: OffersType[];
-  clickChangeCityHandle: (changedCity: string) => void;
+  clickChangeCityHandle: (changedCity: CityNameType) => void;
 }
 
 function FavoritesLocationsItem({offers, clickChangeCityHandle}: FavoritesLocationsItemProps): JSX.Element {

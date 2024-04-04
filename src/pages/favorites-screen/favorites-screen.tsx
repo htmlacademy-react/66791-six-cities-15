@@ -2,7 +2,7 @@ import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
 import {useAppDispatch} from '../../hooks';
-import {OffersType} from '../../types';
+import {OffersType, CityNameType} from '../../types';
 import {changeCity} from '../../store/action';
 
 type FavoritesScreenProps = {
@@ -20,7 +20,7 @@ function FavoritesScreen({offers, setNotFound}: FavoritesScreenProps): JSX.Eleme
     setNotFound(false);
   }
 
-  const clickChangeCityHandle = (changedCity: string): void => {
+  const clickChangeCityHandle = (changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   };
 

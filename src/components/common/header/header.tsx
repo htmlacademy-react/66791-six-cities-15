@@ -1,6 +1,9 @@
+import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../ui/logo';
-import {AuthorizationStatus, AppRoute} from '../../../const';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {logoutAction} from '../../../store/api-actions';
+import {AppRoute, AuthorizationStatus} from '../../../const';
 
 type HeaderProps = {
   isRenderUser: boolean;
@@ -9,6 +12,17 @@ type HeaderProps = {
 }
 
 function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Element {
+  const user = useAppSelector((state) => state.user);
+
+  const dispatch = useAppDispatch();
+
+  const isAuth = authStatus === AuthorizationStatus.Auth;
+
+  const clickLogoutHandle = (evt: MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
+
   return (
     <header className="header">
       <div className="container">
@@ -22,13 +36,19 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                 <li className="header__nav-item user">
                   <Link
                     className="header__nav-link header__nav-link--profile"
-                    to={AppRoute.Favorites}
+                    to={isAuth ? AppRoute.Favorites : AppRoute.Login}
                   >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    {authStatus === AuthorizationStatus.Auth ? (
+                    <div
+                      className="header__avatar-wrapper user__avatar-wrapper"
+                      style={{
+                        backgroundImage: `url(${user.avatarUrl})`,
+                        borderRadius: '50%'
+                      }}
+                    />
+                    {isAuth ? (
                       <>
                         <span className="header__user-name user__name">
-                          Oliver.conner@gmail.com
+                          {user.email}
                         </span>
                         <span className="header__favorite-count">3</span>
                       </>
@@ -36,9 +56,13 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
 
                   </Link>
                 </li>
-                {authStatus === AuthorizationStatus.Auth && (
+                {isAuth && (
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.Root}>
+                    <Link
+                      className="header__nav-link"
+                      to={AppRoute.Root}
+                      onClick={clickLogoutHandle}
+                    >
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li>
