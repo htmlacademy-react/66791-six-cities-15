@@ -1,4 +1,5 @@
 import {useRef, FormEvent} from 'react';
+import {toast} from 'react-toastify';
 import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
 import {useAppSelector, useAppDispatch} from '../../hooks';
@@ -26,6 +27,10 @@ function LoginScreen(): JSX.Element {
           login: loginValue,
           password: passValue
         }));
+      } else {
+        toast.error('The password cannot contain spaces!', {
+          toastId: 'error-spaces'
+        });
       }
     }
   };
