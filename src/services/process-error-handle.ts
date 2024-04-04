@@ -1,9 +1,11 @@
+import {toast} from 'react-toastify';
+import {setOffersDataLoadingStatus} from '../store/action';
 import {store} from '../store';
-import {setError, setOffersDataLoadingStatus} from '../store/action';
-import {clearErrorAction} from '../store/api-actions';
 
 export const processErrorHandle = (message: string): void => {
-  store.dispatch(setError(message));
-  store.dispatch(clearErrorAction());
+  toast.error(message, {
+    toastId: 'error-server'
+  });
+
   store.dispatch(setOffersDataLoadingStatus(false));
 };

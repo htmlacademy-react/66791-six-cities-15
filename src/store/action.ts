@@ -14,6 +14,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const loadUser = createAction<UserDataType>('user/loadUser');
 
-export const setError = createAction<string | null>('service/setError');
-
 export const redirectToRoute = createAction<AppRoute>('service/redirectToRoute');
