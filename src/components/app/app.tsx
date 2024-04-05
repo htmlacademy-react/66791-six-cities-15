@@ -13,16 +13,14 @@ import ScrollToTop from '../ui/scroll-to-top';
 import HistoryRouter from '../history-route';
 import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
-import {ReviewsType, CityType, CitiesType, OfferType} from '../../types';
+import {CitiesType, OffersMocksType} from '../../types';
 
 type AppProps = {
   cities: CitiesType;
-  offers: OfferType[];
-  reviews: ReviewsType;
-  city: CityType;
+  offers: OffersMocksType;
 }
 
-function App({cities, offers, reviews, city}: AppProps): JSX.Element {
+function App({cities, offers}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const [isNotFound, setIsNotFound] = useState(false);
@@ -48,9 +46,6 @@ function App({cities, offers, reviews, city}: AppProps): JSX.Element {
               element={
                 <OfferScreen
                   authorizationStatus={authorizationStatus}
-                  city={city}
-                  offers={offers}
-                  reviews={reviews}
                   setNotFound={setNotFoundFlag}
                 />
               }

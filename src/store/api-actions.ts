@@ -1,14 +1,28 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {loadOffers, setOffersDataLoadingStatus, requireAuthorization, loadUser, redirectToRoute} from './action';
+import {
+  loadOffers,
+  setOffersDataLoadingStatus,
+  requireAuthorization,
+  loadUser,
+  redirectToRoute,
+  loadOffer,
+  setOfferDataLoadingStatus,
+  loadNearOffers,
+  setNearOffersDataLoadingStatus,
+  loadOfferComments,
+  setOfferCommentsDataLoadingStatus
+} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
 import {
   AppDispatch,
   State,
   OffersType,
+  OfferType,
   AuthDataType,
-  UserDataType
+  UserDataType,
+  ReviewsType
 } from '../types';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -80,5 +94,53 @@ export const logoutAction = createAsyncThunk<void, undefined, {
       avatarUrl: '',
       isPro: false
     }));
+  },
+);
+
+export const fetchOfferAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (OfferId, {dispatch, extra: api}) => {
+    dispatch(setOfferDataLoadingStatus(true));
+
+    const {data} = await api.get<OfferType>(`${APIRoute.Offers}/${OfferId}`);
+
+    dispatch(setOfferDataLoadingStatus(false));
+    dispatch(loadOffer(data));
+  },
+);
+
+export const fetchNearOffersAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffersAction',
+  async (OfferId, {dispatch, extra: api}) => {
+    dispatch(setNearOffersDataLoadingStatus(true));
+
+    const {data} = await api.get<OffersType[]>(`${APIRoute.Offers}/${OfferId}/nearby`);
+
+    dispatch(setNearOffersDataLoadingStatus(false));
+    dispatch(loadNearOffers(data));
+  },
+);
+
+export const fetchOfferCommentsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearOffersAction',
+  async (OfferId, {dispatch, extra: api}) => {
+    dispatch(setOfferCommentsDataLoadingStatus(true));
+
+    const {data} = await api.get<ReviewsType>(`/comments/${OfferId}`);
+
+    dispatch(setOfferCommentsDataLoadingStatus(false));
+    dispatch(loadOfferComments(data));
   },
 );
