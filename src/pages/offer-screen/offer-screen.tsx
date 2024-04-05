@@ -137,7 +137,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
                     Reviews · <span className="reviews__amount">{currentOfferReviews.length}</span>
                   </h2>
                   <ReviewsList reviews={currentOfferReviews}/>
-                  {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm/>}
+                  {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={id} />}
                 </section>
               </div>
             </div>

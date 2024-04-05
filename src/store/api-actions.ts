@@ -11,7 +11,9 @@ import {
   loadNearOffers,
   setNearOffersDataLoadingStatus,
   loadOfferComments,
-  setOfferCommentsDataLoadingStatus
+  setOfferCommentsDataLoadingStatus,
+  loadOfferComment,
+  setOfferCommentDataLoadingStatus
 } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AuthorizationStatus, AppRoute} from '../const';
@@ -22,6 +24,8 @@ import {
   OfferType,
   AuthDataType,
   UserDataType,
+  ReviewDataType,
+  ReviewType,
   ReviewsType
 } from '../types';
 
@@ -135,12 +139,31 @@ export const fetchOfferCommentsAction = createAsyncThunk<void, string, {
   extra: AxiosInstance;
 }>(
   'data/fetchNearOffersAction',
-  async (OfferId, {dispatch, extra: api}) => {
+  async (offerId, {dispatch, extra: api}) => {
     dispatch(setOfferCommentsDataLoadingStatus(true));
 
-    const {data} = await api.get<ReviewsType>(`/comments/${OfferId}`);
+    const {data} = await api.get<ReviewsType>(APIRoute.Comments.replace(/{offerId}/, offerId));
 
     dispatch(setOfferCommentsDataLoadingStatus(false));
     dispatch(loadOfferComments(data));
+  },
+);
+
+export const addRewiewAction = createAsyncThunk<void, ReviewDataType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async ({offerId, comment, rating}, {dispatch, extra: api}) => {
+    dispatch(setOfferCommentDataLoadingStatus(true));
+
+    const {data} = await api.post<ReviewType>(
+      APIRoute.Comments.replace(/{offerId}/, offerId),
+      {comment, rating}
+    );
+
+    dispatch(setOfferCommentDataLoadingStatus(false));
+    dispatch(loadOfferComment(data));
   },
 );

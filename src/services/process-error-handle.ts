@@ -3,7 +3,8 @@ import {
   setOffersDataLoadingStatus,
   setOfferDataLoadingStatus,
   setOfferCommentsDataLoadingStatus,
-  setNearOffersDataLoadingStatus
+  setNearOffersDataLoadingStatus,
+  setOfferCommentDataLoadingStatus
 } from '../store/action';
 import {store} from '../store';
 
@@ -16,4 +17,5 @@ export const processErrorHandle = (message: string): void => {
   store.dispatch(setOfferDataLoadingStatus(false));
   store.dispatch(setOfferCommentsDataLoadingStatus(false));
   store.dispatch(setNearOffersDataLoadingStatus(false));
+  store.dispatch(setOfferCommentDataLoadingStatus(false));
 };

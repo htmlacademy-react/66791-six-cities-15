@@ -9,3 +9,9 @@ export type ReviewType = {
 }
 
 export type ReviewsType = ReviewType[];
+
+export type ReviewDataType = {
+  offerId: string;
+  comment: string;
+  rating: number;
+}

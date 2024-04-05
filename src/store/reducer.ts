@@ -11,7 +11,9 @@ import {
   loadNearOffers,
   setNearOffersDataLoadingStatus,
   loadOfferComments,
-  setOfferCommentsDataLoadingStatus
+  setOfferCommentsDataLoadingStatus,
+  loadOfferComment,
+  setOfferCommentDataLoadingStatus
 } from './action';
 import {OffersType, OfferType, CityNameType, SortOffersType, UserDataType, ReviewsType} from '../types';
 import {CITIES, AuthorizationStatus} from '../const';
@@ -29,6 +31,7 @@ type initialStateType = {
   isNearOffersDataLoading: boolean;
   offerComments: ReviewsType;
   isOfferCommentsDataLoading: boolean;
+  isOfferCommentDataLoading: boolean;
 }
 
 const initialState: initialStateType = {
@@ -79,6 +82,7 @@ const initialState: initialStateType = {
   isNearOffersDataLoading: false,
   offerComments: [],
   isOfferCommentsDataLoading: false,
+  isOfferCommentDataLoading: false,
   activeSortType: 'SortPopular',
   authorizationStatus: AuthorizationStatus.Unknown,
 };
@@ -120,6 +124,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferCommentsDataLoadingStatus, (state, action) => {
       state.isOfferCommentsDataLoading = action.payload;
+    })
+    .addCase(loadOfferComment, (state, action) => {
+      state.offerComments.push(action.payload);
+    })
+    .addCase(setOfferCommentDataLoadingStatus, (state, action) => {
+      state.isOfferCommentDataLoading = action.payload;
     });
 });
 

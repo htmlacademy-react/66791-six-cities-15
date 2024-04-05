@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {CityNameType, OffersType, OfferType, SortOffersType, UserDataType, ReviewsType} from '../types';
+import {CityNameType, OffersType, OfferType, SortOffersType, UserDataType, ReviewType, ReviewsType} from '../types';
 import {AuthorizationStatus, AppRoute} from '../const';
 
 export const changeCity = createAction<CityNameType>('service/changeCity');
@@ -27,3 +27,7 @@ export const setNearOffersDataLoadingStatus = createAction<boolean>('data/setNea
 export const loadOfferComments = createAction<ReviewsType>('data/loadOfferComments');
 
 export const setOfferCommentsDataLoadingStatus = createAction<boolean>('data/setOfferCommentsDataLoadingStatus');
+
+export const loadOfferComment = createAction<ReviewType>('data/loadOfferComment');
+
+export const setOfferCommentDataLoadingStatus = createAction<boolean>('data/setOfferCommentDataLoadingStatus');
