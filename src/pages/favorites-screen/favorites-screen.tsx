@@ -2,11 +2,11 @@ import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
 import {useAppDispatch} from '../../hooks';
-import {OffersType, CityNameType} from '../../types';
+import {CityNameType, OffersMocksType} from '../../types';
 import {changeCity} from '../../store/action';
 
 type FavoritesScreenProps = {
-  offers: OffersType[];
+  offers: OffersMocksType;
   setNotFound: (flag: boolean) => void;
 }
 

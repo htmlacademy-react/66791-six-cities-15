@@ -25,7 +25,7 @@ export type OffersType = {
   rating: number;
 }
 
-export type OfferType = OffersType & {
+export type OfferType = Omit<OffersType, 'previewImage'> & {
   description: string;
   bedrooms: number;
   goods: string[];
@@ -34,11 +34,21 @@ export type OfferType = OffersType & {
   maxAdults: number;
 }
 
-/*export type OfferType = Omit<OffersType, 'previewImage'> & {
+export type OffersMocksType = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  previewImage: string;
+  city: CityType;
+  location: LocationType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
   description: string;
   bedrooms: number;
   goods: string[];
   host: UserType;
   images: string[];
   maxAdults: number;
-}*/
+}[]

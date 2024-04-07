@@ -2,12 +2,16 @@ import {UserType} from './offers-type';
 
 export type ReviewType = {
   id: string;
-  comment: string;
   date: string;
-  rating: number;
   user: UserType;
+  comment: string;
+  rating: number;
 }
 
-export type ReviewsType = {
-  [key: string]: ReviewType[];
+export type ReviewsType = ReviewType[];
+
+export type ReviewDataType = {
+  offerId: string;
+  comment: string;
+  rating: number;
 }

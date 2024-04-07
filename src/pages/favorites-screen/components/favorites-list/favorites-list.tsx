@@ -1,8 +1,8 @@
 import FavoritesLocationsItem from '../favorites-locations-item';
-import {OffersType, CityNameType} from '../../../../types';
+import {OffersMocksType, CityNameType} from '../../../../types';
 
 type FavoritesListProps = {
-  offers: OffersType[];
+  offers: OffersMocksType;
   clickChangeCityHandle: (changedCity: CityNameType) => void;
 }
 

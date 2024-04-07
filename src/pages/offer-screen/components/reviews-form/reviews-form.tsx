@@ -1,14 +1,37 @@
-import {useState, ChangeEvent} from 'react';
+import {useState, ChangeEvent, FormEvent} from 'react';
+import {useAppDispatch} from '../../../../hooks';
+import {addRewiewAction} from '../../../../store/api-actions';
 import RatingForm from '../rating-form';
 
 type ChangeFieldHandleType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
-function ReviewsForm(): JSX.Element {
+type ReviewsFormProps = {
+  offerId: string;
+}
+
+function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const [reviewsFormData, setReviewsFormData] = useState({
     rating: 0,
     review: ''
   });
   const {rating, review} = reviewsFormData;
+
+  const clickSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    dispatch(addRewiewAction({
+      offerId,
+      comment: reviewsFormData.review,
+      rating: +reviewsFormData.rating
+    }));
+
+    setReviewsFormData({
+      rating: 0,
+      review: ''
+    });
+  };
 
   const changeFieldHandle = (evt: ChangeFieldHandleType): void => {
     const {name, value} = evt.target;
@@ -16,7 +39,7 @@ function ReviewsForm(): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={clickSubmitHandle}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -39,7 +62,7 @@ function ReviewsForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === 0 || review.length < 50}
+          disabled={rating === 0 || review.length < 50 || review.length > 300}
         >
           Submit
         </button>

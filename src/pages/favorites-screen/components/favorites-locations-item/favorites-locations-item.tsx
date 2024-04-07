@@ -1,9 +1,9 @@
 import LocationsItem from '../../../../components/ui/locations-item';
 import PlaceCard from '../../../../components/common/place-card';
-import {OffersType, CityNameType} from '../../../../types';
+import {OffersMocksType, CityNameType} from '../../../../types';
 
 type FavoritesLocationsItemProps = {
-  offers: OffersType[];
+  offers: OffersMocksType;
   clickChangeCityHandle: (changedCity: CityNameType) => void;
 }
 
