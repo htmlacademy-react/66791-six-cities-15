@@ -123,10 +123,10 @@ export const fetchNearOffersAction = createAsyncThunk<void, string, {
   extra: AxiosInstance;
 }>(
   'data/fetchNearOffersAction',
-  async (OfferId, {dispatch, extra: api}) => {
+  async (offerId, {dispatch, extra: api}) => {
     dispatch(setNearOffersDataLoadingStatus(true));
 
-    const {data} = await api.get<OffersType[]>(`${APIRoute.Offers}/${OfferId}/nearby`);
+    const {data} = await api.get<OffersType[]>(APIRoute.OffersNearby.replace(/{offerId}/, offerId));
 
     dispatch(setNearOffersDataLoadingStatus(false));
     dispatch(loadNearOffers(data));
