@@ -1,4 +1,4 @@
-import {useRef, FormEvent} from 'react';
+import {useRef, FormEvent, useCallback} from 'react';
 import {toast} from 'react-toastify';
 import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
@@ -35,9 +35,9 @@ function LoginScreen(): JSX.Element {
     }
   };
 
-  const clickChangeCityHandle = (changedCity: CityNameType): void => {
+  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
-  };
+  }, [dispatch]);
 
   return (
     <>

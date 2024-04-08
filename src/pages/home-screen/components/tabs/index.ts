@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import Tabs from './tabs';
 
-export default Tabs;
+export default memo(Tabs);

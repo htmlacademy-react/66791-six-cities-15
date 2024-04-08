@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import Meta from './meta';
 
-export default Meta;
+export default memo(Meta);

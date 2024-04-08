@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import LocationsItem from './locations-item';
 
-export default LocationsItem;
+export default memo(LocationsItem);

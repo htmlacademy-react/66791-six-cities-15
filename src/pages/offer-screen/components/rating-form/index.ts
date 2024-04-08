@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import RatingForm from './rating-form';
 
-export default RatingForm;
+export default memo(RatingForm);

@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import PlacesFound from './places-found';
 
-export default PlacesFound;
+export default memo(PlacesFound);

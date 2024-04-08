@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback, useMemo} from 'react';
 import {useSearchParams, useNavigate} from 'react-router-dom';
 import Meta from '../../components/common/meta';
 import PlacesList from './components/places-list';
@@ -37,11 +37,12 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCityWithLocation = isOffers
     ? offers[0].city
     : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
+  const offersLocation = useMemo(() => getOffersLocation(offers), [offers]);
 
-  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
-  const clickChangeCityHandle = (changedCity: CityNameType): void => {
+  const hoverPlaceCardHandle = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
+  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(changeCity(firstLetterToUppercase(currentTab) as CityNameType));
@@ -100,7 +101,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                 {isOffers && (
                   <Map
                     city={currentCityWithLocation}
-                    points={getOffersLocation(offers)}
+                    points={offersLocation}
                     selectedPointId={activePlaceCardId}
                     isMainMap
                   />

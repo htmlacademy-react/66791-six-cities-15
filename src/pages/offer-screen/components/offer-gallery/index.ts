@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import OfferGallery from './offer-gallery';
 
-export default OfferGallery;
+export default memo(OfferGallery);

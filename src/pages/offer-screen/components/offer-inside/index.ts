@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import OfferInside from './offer-inside';
 
-export default OfferInside;
+export default memo(OfferInside);

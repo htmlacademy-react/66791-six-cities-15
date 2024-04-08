@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import Logo from './logo';
 
-export default Logo;
+export default memo(Logo);
