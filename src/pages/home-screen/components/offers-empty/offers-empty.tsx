@@ -1,10 +1,10 @@
 import {CityNameType} from '../../../../types';
 
-type OffersEmptyType = {
+type OffersEmptyProps = {
   currentCity: CityNameType;
 };
 
-function OffersEmpty({currentCity}: OffersEmptyType): JSX.Element {
+function OffersEmpty({currentCity}: OffersEmptyProps): JSX.Element {
   return (
     <section className="cities__no-places">
       <div className="cities__status-wrapper tabs__content">

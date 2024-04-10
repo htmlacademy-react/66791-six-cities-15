@@ -54,3 +54,8 @@ export enum NameSpace {
   Service = 'SERVICE',
   User = 'USER',
 }
+
+export enum BookmarkButtonType {
+  PlaceCard = 'place-card',
+  Offer = 'offer',
+}
