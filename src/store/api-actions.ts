@@ -97,7 +97,7 @@ export const fetchNearOffersAction = createAsyncThunk<OffersType[], string, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchNearOffersAction',
+  'data/fetchNearOffers',
   async (offerId, {extra: api}) => {
     const {data} = await api.get<OffersType[]>(APIRoute.OffersNearby.replace(/{offerId}/, offerId));
 
@@ -110,7 +110,7 @@ export const fetchOfferCommentsAction = createAsyncThunk<ReviewsType, string, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchNearOffersAction',
+  'data/fetchOfferComments',
   async (offerId, {extra: api}) => {
     const {data} = await api.get<ReviewsType>(APIRoute.Comments.replace(/{offerId}/, offerId));
 
@@ -123,7 +123,7 @@ export const addRewiewAction = createAsyncThunk<ReviewType, ReviewDataType, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/addRewiewAction',
+  'data/addRewiew',
   async ({offerId, comment, rating}, {extra: api}) => {
     const {data} = await api.post<ReviewType>(
       APIRoute.Comments.replace(/{offerId}/, offerId),
