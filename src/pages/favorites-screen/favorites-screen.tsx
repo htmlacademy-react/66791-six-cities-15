@@ -4,7 +4,7 @@ import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
 import {useAppDispatch} from '../../hooks';
 import {CityNameType, OffersMocksType} from '../../types';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/service-process/service-process.slice';
 
 type FavoritesScreenProps = {
   offers: OffersMocksType;

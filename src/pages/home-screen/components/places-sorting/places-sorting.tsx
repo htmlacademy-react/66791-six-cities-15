@@ -1,14 +1,15 @@
 import {useState, useEffect, useRef} from 'react';
 import {useAppSelector, useAppDispatch} from '../../../../hooks';
-import {changeSortType} from '../../../../store/action';
+import {changeSortType} from '../../../../store/service-process/service-process.slice';
 import {SortOffersType} from '../../../../types';
 import {SortingOption} from '../../../../const';
+import {getActiveSortType} from '../../../../store/service-process/service-process.selectors';
 
 function PlacesSorting(): JSX.Element {
   const sortingTypeRef = useRef(null);
   const sortingOptionsRef = useRef(null);
 
-  const activeSortType = useAppSelector((state) => state.activeSortType);
+  const activeSortType = useAppSelector(getActiveSortType);
 
   const [isPlacesOptionsOpen, setIsPlacesOptionsOpen] = useState(false);
 

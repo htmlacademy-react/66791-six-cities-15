@@ -8,18 +8,20 @@ import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
 import Spinner from '../../components/ui/spinner';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/service-process/service-process.slice';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
 import {CitiesType, CityNameType} from '../../types';
+import {getCurrentCity} from '../../store/service-process/service-process.selectors';
+import {getOffers, getOffersDataLoadingStatus} from '../../store/service-data/service-data.selectors';
 
 type HomeScreenProps = {
   cities: CitiesType;
 }
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offers = useAppSelector((state) => state.offers).filter(
+  const currentCity = useAppSelector(getCurrentCity);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const offers = useAppSelector(getOffers).filter(
     (offer) => offer.city.name === currentCity
   );
 

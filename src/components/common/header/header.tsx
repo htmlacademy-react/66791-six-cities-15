@@ -4,6 +4,7 @@ import Logo from '../../ui/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {logoutAction} from '../../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../../const';
+import {getUser} from '../../../store/user-process/user-process.selectors';
 
 type HeaderProps = {
   isRenderUser: boolean;
@@ -12,7 +13,7 @@ type HeaderProps = {
 }
 
 function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Element {
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
 
