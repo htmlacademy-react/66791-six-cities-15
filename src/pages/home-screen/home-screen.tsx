@@ -7,6 +7,7 @@ import Tabs from './components/tabs';
 import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
 import Spinner from '../../components/ui/spinner';
+import OffersEmpty from './components/offers-empty';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/service-process/service-process.slice';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
@@ -89,16 +90,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                   />
                 </section>
               )}
-              {!isOffers && (
-                <section className="cities__no-places">
-                  <div className="cities__status-wrapper tabs__content">
-                    <b className="cities__status">No places to stay available</b>
-                    <p className="cities__status-description">
-                      We could not find any property available at the moment in {currentCity}
-                    </p>
-                  </div>
-                </section>
-              )}
+              {!isOffers && <OffersEmpty currentCity={currentCity} />}
               <div className="cities__right-section">
                 {isOffers && (
                   <Map

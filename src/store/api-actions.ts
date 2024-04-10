@@ -12,7 +12,8 @@ import {
   UserDataType,
   ReviewDataType,
   ReviewType,
-  ReviewsType
+  ReviewsType,
+  FavoriteDataType
 } from '../types';
 
 export const fetchOffersAction = createAsyncThunk<OffersType[], undefined, {
@@ -129,6 +130,32 @@ export const addRewiewAction = createAsyncThunk<ReviewType, ReviewDataType, {
       APIRoute.Comments.replace(/{offerId}/, offerId),
       {comment, rating}
     );
+
+    return data;
+  },
+);
+
+export const changeFavoriteAction = createAsyncThunk<{offer: OfferType & {previewImage: string}; isFavorite: boolean}, FavoriteDataType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/changeFavorite',
+  async ({offerId, isFavorite}, {extra: api}) => {
+    const {data} = await api.post<OfferType & {previewImage: string}>(`${APIRoute.Favorite}/${offerId}/${Number(isFavorite)}`);
+
+    return {offer: data, isFavorite};
+  },
+);
+
+export const fetchFavoriteOffersAction = createAsyncThunk<OffersType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteOffers',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<OffersType[]>(APIRoute.Favorite);
 
     return data;
   },

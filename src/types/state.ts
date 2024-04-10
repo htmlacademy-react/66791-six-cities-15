@@ -12,6 +12,9 @@ export type ServiceDataType = {
   offerComments: ReviewsType;
   isOfferCommentsDataLoading: boolean;
   isOfferCommentDataLoading: boolean;
+  isChangeFavoriteDataLoading: boolean;
+  favoriteOffers: OffersType[];
+  isFavoriteOffersDataLoading: boolean;
 };
 
 export type ServiceProcessType = {

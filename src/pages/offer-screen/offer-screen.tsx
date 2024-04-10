@@ -9,9 +9,10 @@ import ReviewsForm from './components/reviews-form';
 import NearPlaces from './components/near-places';
 import Map from '../../components/common/map';
 import Spinner from '../../components/ui/spinner';
+import BookmarkButton from '../../components/ui/bookmark-button';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {fetchOfferAction, fetchNearOffersAction, fetchOfferCommentsAction} from '../../store/api-actions';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, BookmarkButtonType} from '../../const';
 import {getOffersLocation, percentageStars, firstLetterToUppercase} from '../../utils';
 import {OfferType, OffersType} from '../../types';
 import {
@@ -79,17 +80,11 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
                 )}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{currentOffer.title}</h1>
-                  <button
-                    className={`offer__bookmark-button ${
-                      currentOffer.isFavorite ? 'offer__bookmark-button--active' : ''
-                    } button`}
-                    type="button"
-                  >
-                    <svg className="offer__bookmark-icon" width={31} height={33}>
-                      <use xlinkHref="#icon-bookmark"/>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+                  <BookmarkButton
+                    offerId={id}
+                    isFavorite={currentOffer.isFavorite}
+                    type={BookmarkButtonType.Offer}
+                  />
                 </div>
                 <div className="offer__rating rating">
                   <div className="offer__stars rating__stars">

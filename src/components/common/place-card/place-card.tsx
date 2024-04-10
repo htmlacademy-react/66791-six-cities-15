@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
+import BookmarkButton from '../../ui/bookmark-button';
 import {OffersType} from '../../../types';
-import {AppRoute} from '../../../const';
+import {AppRoute, BookmarkButtonType} from '../../../const';
 import {firstLetterToUppercase, percentageStars} from '../../../utils';
 
 type PlaceCardProps = {
@@ -61,8 +62,8 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={260}
-            height={200}
+            width={isFavorites ? 150 : 260}
+            height={isFavorites ? 110 : 200}
             alt="Place image"
           />
         </Link>
@@ -73,19 +74,11 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            className={`place-card__bookmark-button ${isFavorite && 'place-card__bookmark-button--active'} button`}
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark"/>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <BookmarkButton
+            offerId={id}
+            isFavorite={isFavorite}
+            type={BookmarkButtonType.PlaceCard}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

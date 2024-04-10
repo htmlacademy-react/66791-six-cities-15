@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {logoutAction} from '../../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../../const';
 import {getUser} from '../../../store/user-process/user-process.selectors';
+import {getFavoriteOffers} from '../../../store/service-data/service-data.selectors';
 
 type HeaderProps = {
   isRenderUser: boolean;
@@ -14,6 +15,7 @@ type HeaderProps = {
 
 function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Element {
   const user = useAppSelector(getUser);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   const dispatch = useAppDispatch();
 
@@ -51,7 +53,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                         <span className="header__user-name user__name">
                           {user.email}
                         </span>
-                        <span className="header__favorite-count">3</span>
+                        <span className="header__favorite-count">{favoriteOffers.length}</span>
                       </>
                     ) : <span className="header__login">Sign in</span>}
 

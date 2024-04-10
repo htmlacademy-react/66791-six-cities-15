@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
 import {ServiceDataType} from '../../types';
 import {
@@ -6,7 +6,9 @@ import {
   fetchOfferAction,
   fetchNearOffersAction,
   fetchOfferCommentsAction,
-  addRewiewAction
+  addRewiewAction,
+  changeFavoriteAction,
+  fetchFavoriteOffersAction
 } from '../api-actions';
 
 const initialState: ServiceDataType = {
@@ -50,12 +52,25 @@ const initialState: ServiceDataType = {
   offerComments: [],
   isOfferCommentsDataLoading: false,
   isOfferCommentDataLoading: false,
+  isChangeFavoriteDataLoading: false,
+  favoriteOffers: [],
+  isFavoriteOffersDataLoading: false,
 };
 
 export const serviceData = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    refreshOffers: (state, action: PayloadAction<{offerId: string; isFavorite: boolean}>) => {
+      const {offerId, isFavorite} = action.payload;
+
+      state.offers = state.offers.map((item) => (
+        item.id === offerId
+          ? {...item, isFavorite}
+          : item
+      ));
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state) => {
@@ -92,6 +107,29 @@ export const serviceData = createSlice({
       .addCase(addRewiewAction.fulfilled, (state, action) => {
         state.offerComments.push(action.payload);
         state.isOfferCommentDataLoading = false;
+      })
+      .addCase(changeFavoriteAction.pending, (state) => {
+        state.isOfferCommentDataLoading = true;
+      })
+      .addCase(changeFavoriteAction.fulfilled, (state, action) => {
+        const {offer, isFavorite} = action.payload;
+
+        if (isFavorite) {
+          state.favoriteOffers.push(offer);
+        } else {
+          state.favoriteOffers = state.favoriteOffers.filter((item) => item.id !== offer.id);
+        }
+
+        state.isOfferCommentDataLoading = false;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.isFavoriteOffersDataLoading = true;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+        state.isFavoriteOffersDataLoading = false;
       });
   }
 });
+
+export const {refreshOffers} = serviceData.actions;
