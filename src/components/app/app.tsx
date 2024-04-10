@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks';
 import Layout from '../layout';
 import HomeScreen from '../../pages/home-screen';
 import LoginScreen from '../../pages/login-screen';
@@ -12,9 +12,10 @@ import PrivateRoute from '../private-route';
 import ScrollToTop from '../ui/scroll-to-top';
 import HistoryRouter from '../history-route';
 import browserHistory from '../../browser-history';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {CitiesType, OffersMocksType} from '../../types';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
+import {fetchFavoriteOffersAction} from '../../store/api-actions';
 
 type AppProps = {
   cities: CitiesType;
@@ -24,8 +25,14 @@ type AppProps = {
 function App({cities, offers}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
+  const dispatch = useAppDispatch();
+
   const [isNotFound, setIsNotFound] = useState(false);
   const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    dispatch(fetchFavoriteOffersAction());
+  }
 
   return (
     <HelmetProvider>

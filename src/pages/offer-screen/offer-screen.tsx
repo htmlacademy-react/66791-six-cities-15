@@ -81,6 +81,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">{currentOffer.title}</h1>
                   <BookmarkButton
+                    offerId={id}
                     isFavorite={currentOffer.isFavorite}
                     type={BookmarkButtonType.Offer}
                   />

@@ -6,3 +6,4 @@ export * from './sort-type';
 export * from './auth-data-type';
 export * from './user-data-type';
 export * from './state';
+export * from './favorite-type';
