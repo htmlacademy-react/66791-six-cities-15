@@ -14,6 +14,14 @@ import {fetchOfferAction, fetchNearOffersAction, fetchOfferCommentsAction} from 
 import {AuthorizationStatus} from '../../const';
 import {getOffersLocation, percentageStars, firstLetterToUppercase} from '../../utils';
 import {OfferType, OffersType} from '../../types';
+import {
+  getOfferDataLoadingStatus,
+  getNearOffersDataLoadingStatus,
+  getOfferCommentsDataLoading,
+  getOffer,
+  getOfferComments,
+  getNearOffers
+} from '../../store/service-data/service-data.selectors';
 
 type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
@@ -23,12 +31,12 @@ type OfferScreenProps = {
 const NUMBER_OFFERS = 3;
 
 function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.Element {
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
-  const isNearOffersDataLoading = useAppSelector((state) => state.isNearOffersDataLoading);
-  const isOfferCommentsDataLoading = useAppSelector((state) => state.isOfferCommentsDataLoading);
-  const currentOffer = useAppSelector((state) => state.offer);
-  const currentOfferReviews = useAppSelector((state) => state.offerComments);
-  const nearOffers = useAppSelector((state) => state.nearOffers).slice(0, NUMBER_OFFERS);
+  const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
+  const isNearOffersDataLoading = useAppSelector(getNearOffersDataLoadingStatus);
+  const isOfferCommentsDataLoading = useAppSelector(getOfferCommentsDataLoading);
+  const currentOffer = useAppSelector(getOffer);
+  const currentOfferReviews = useAppSelector(getOfferComments);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, NUMBER_OFFERS);
 
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();

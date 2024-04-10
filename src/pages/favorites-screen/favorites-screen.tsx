@@ -1,9 +1,10 @@
+import {useCallback} from 'react';
 import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
 import {useAppDispatch} from '../../hooks';
 import {CityNameType, OffersMocksType} from '../../types';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/service-process/service-process.slice';
 
 type FavoritesScreenProps = {
   offers: OffersMocksType;
@@ -13,16 +14,16 @@ type FavoritesScreenProps = {
 function FavoritesScreen({offers, setNotFound}: FavoritesScreenProps): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
+    dispatch(changeCity(changedCity));
+  }, [dispatch]);
+
   if (offers.length === 0) {
     setNotFound(true);
     return <NothingFoundScreen state="favorites" />;
   } else {
     setNotFound(false);
   }
-
-  const clickChangeCityHandle = (changedCity: CityNameType): void => {
-    dispatch(changeCity(changedCity));
-  };
 
   return (
     <>

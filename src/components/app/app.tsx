@@ -14,6 +14,7 @@ import HistoryRouter from '../history-route';
 import browserHistory from '../../browser-history';
 import {AppRoute} from '../../const';
 import {CitiesType, OffersMocksType} from '../../types';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 
 type AppProps = {
   cities: CitiesType;
@@ -21,7 +22,7 @@ type AppProps = {
 }
 
 function App({cities, offers}: AppProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const [isNotFound, setIsNotFound] = useState(false);
   const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);

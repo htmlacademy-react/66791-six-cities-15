@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import NearPlaces from './near-places';
 
-export default NearPlaces;
+export default memo(NearPlaces);

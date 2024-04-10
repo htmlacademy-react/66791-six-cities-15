@@ -1,6 +1,7 @@
 import {useAppSelector} from '../../../../hooks';
 import PlaceCard from '../../../../components/common/place-card';
 import {OffersType} from '../../../../types';
+import {getActiveSortType} from '../../../../store/service-process/service-process.selectors';
 
 type PlacesListProps = {
   offers: OffersType[];
@@ -8,7 +9,7 @@ type PlacesListProps = {
 }
 
 function PlacesList({offers, hoverPlaceCard}: PlacesListProps): JSX.Element {
-  const activeSortType = useAppSelector((state) => state.activeSortType);
+  const activeSortType = useAppSelector(getActiveSortType);
 
   const sortingOffers = (offersSort: OffersType[], type: string): OffersType[] => {
     switch (type) {

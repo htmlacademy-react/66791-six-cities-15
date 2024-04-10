@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import ReviewsItem from './reviews-item';
 
-export default ReviewsItem;
+export default memo(ReviewsItem);

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback, useMemo} from 'react';
 import {useSearchParams, useNavigate} from 'react-router-dom';
 import Meta from '../../components/common/meta';
 import PlacesList from './components/places-list';
@@ -8,18 +8,20 @@ import PlacesFound from './components/places-found';
 import PlacesSorting from './components/places-sorting';
 import Spinner from '../../components/ui/spinner';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/service-process/service-process.slice';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
 import {CitiesType, CityNameType} from '../../types';
+import {getCurrentCity} from '../../store/service-process/service-process.selectors';
+import {getOffers, getOffersDataLoadingStatus} from '../../store/service-data/service-data.selectors';
 
 type HomeScreenProps = {
   cities: CitiesType;
 }
 
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
-  const currentCity = useAppSelector((state) => state.currentCity);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const offers = useAppSelector((state) => state.offers).filter(
+  const currentCity = useAppSelector(getCurrentCity);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const offers = useAppSelector(getOffers).filter(
     (offer) => offer.city.name === currentCity
   );
 
@@ -37,11 +39,12 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCityWithLocation = isOffers
     ? offers[0].city
     : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
+  const offersLocation = useMemo(() => getOffersLocation(offers), [offers]);
 
-  const hoverPlaceCardHandle = (offerId: string): void => setActivePlaceCardId(offerId);
-  const clickChangeCityHandle = (changedCity: CityNameType): void => {
+  const hoverPlaceCardHandle = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
+  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(changeCity(firstLetterToUppercase(currentTab) as CityNameType));
@@ -100,7 +103,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                 {isOffers && (
                   <Map
                     city={currentCityWithLocation}
-                    points={getOffersLocation(offers)}
+                    points={offersLocation}
                     selectedPointId={activePlaceCardId}
                     isMainMap
                   />

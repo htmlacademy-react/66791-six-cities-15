@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import HistoryRouter from './history-route';
 
-export default HistoryRouter;
+export default memo(HistoryRouter);

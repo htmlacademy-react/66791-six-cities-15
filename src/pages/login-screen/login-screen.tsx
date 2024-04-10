@@ -1,17 +1,18 @@
-import {useRef, FormEvent} from 'react';
+import {useRef, FormEvent, useCallback} from 'react';
 import {toast} from 'react-toastify';
 import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/service-process/service-process.slice';
 import {loginAction} from '../../store/api-actions';
 import {CityNameType} from '../../types';
+import {getCurrentCity} from '../../store/service-process/service-process.selectors';
 
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const currentCity = useAppSelector((state) => state.currentCity);
+  const currentCity = useAppSelector(getCurrentCity);
 
   const dispatch = useAppDispatch();
 
@@ -35,9 +36,9 @@ function LoginScreen(): JSX.Element {
     }
   };
 
-  const clickChangeCityHandle = (changedCity: CityNameType): void => {
+  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
-  };
+  }, [dispatch]);
 
   return (
     <>
