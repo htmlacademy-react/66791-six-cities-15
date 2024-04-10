@@ -13,16 +13,15 @@ import ScrollToTop from '../ui/scroll-to-top';
 import HistoryRouter from '../history-route';
 import browserHistory from '../../browser-history';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {CitiesType, OffersMocksType} from '../../types';
+import {CitiesType} from '../../types';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 import {fetchFavoriteOffersAction} from '../../store/api-actions';
 
 type AppProps = {
   cities: CitiesType;
-  offers: OffersMocksType;
 }
 
-function App({cities, offers}: AppProps): JSX.Element {
+function App({cities}: AppProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
@@ -70,10 +69,7 @@ function App({cities, offers}: AppProps): JSX.Element {
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute authorizationStatus={authorizationStatus}>
-                  <FavoritesScreen
-                    offers={offers.filter((offer) => offer.isFavorite)}
-                    setNotFound={setNotFoundFlag}
-                  />
+                  <FavoritesScreen setNotFound={setNotFoundFlag} />
                 </PrivateRoute>
               }
             />
