@@ -62,8 +62,8 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
           <img
             className="place-card__image"
             src={previewImage}
-            width={260}
-            height={200}
+            width={isFavorites ? 150 : 260}
+            height={isFavorites ? 110 : 200}
             alt="Place image"
           />
         </Link>
