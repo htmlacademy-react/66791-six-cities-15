@@ -12,7 +12,7 @@ import Spinner from '../../components/ui/spinner';
 import BookmarkButton from '../../components/ui/bookmark-button';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {fetchOfferAction, fetchNearOffersAction, fetchOfferCommentsAction} from '../../store/api-actions';
-import {AuthorizationStatus, BookmarkButtonType, NUMBER_OFFERS, NUMBER_REVIEWS} from '../../const';
+import {AuthorizationStatus, BookmarkButtonType, Number} from '../../const';
 import {getOffersLocation, percentageStars, firstLetterToUppercase} from '../../utils';
 import {
   getOfferDataLoadingStatus,
@@ -33,8 +33,8 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
   const isNearOffersDataLoading = useAppSelector(getNearOffersDataLoadingStatus);
   const isOfferCommentsDataLoading = useAppSelector(getOfferCommentsDataLoading);
   const currentOffer = useAppSelector(getOffer);
-  const currentOfferReviews = useAppSelector(getOfferComments).slice(0, NUMBER_REVIEWS);
-  const nearOffers = useAppSelector(getNearOffers).slice(0, NUMBER_OFFERS);
+  const currentOfferReviews = useAppSelector(getOfferComments).slice(0, Number.Reviews);
+  const nearOffers = useAppSelector(getNearOffers).slice(0, Number.Offers);
 
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();
@@ -75,7 +75,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
               <main className="page__main page__main--offer">
                 <section className="offer">
                   <div className="offer__gallery-container container">
-                    <OfferGallery images={currentOffer.images}/>
+                    <OfferGallery images={currentOffer.images.slice(0, Number.PreviewImages)}/>
                   </div>
                   <div className="offer__container container">
                     <div className="offer__wrapper">

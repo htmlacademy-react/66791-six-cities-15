@@ -61,6 +61,8 @@ export enum BookmarkButtonType {
   Offer = 'offer',
 }
 
-export const NUMBER_OFFERS = 3;
-
-export const NUMBER_REVIEWS = 10;
+export enum Number {
+  Offers = 3,
+  Reviews = 10,
+  PreviewImages = 6,
+}
