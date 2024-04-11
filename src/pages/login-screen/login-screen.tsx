@@ -4,7 +4,7 @@ import Meta from '../../components/common/meta';
 import LocationsItem from '../../components/ui/locations-item';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {changeCity} from '../../store/service-process/service-process.slice';
-import {loginAction} from '../../store/api-actions';
+import {loginAction, fetchOffersAction} from '../../store/api-actions';
 import {CityNameType} from '../../types';
 import {getCurrentCity} from '../../store/service-process/service-process.selectors';
 
@@ -27,7 +27,10 @@ function LoginScreen(): JSX.Element {
         dispatch(loginAction({
           login: loginValue,
           password: passValue
-        }));
+        }))
+          .then(() => {
+            dispatch(fetchOffersAction());
+          });
       } else {
         toast.error('The password cannot contain spaces!', {
           toastId: 'error-spaces'

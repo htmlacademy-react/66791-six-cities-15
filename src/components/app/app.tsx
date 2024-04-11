@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {useAppSelector, useAppDispatch} from '../../hooks';
@@ -29,9 +29,11 @@ function App({cities}: AppProps): JSX.Element {
   const [isNotFound, setIsNotFound] = useState(false);
   const setNotFoundFlag = (flag: boolean): void => setIsNotFound(flag);
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    dispatch(fetchFavoriteOffersAction());
-  }
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   return (
     <HelmetProvider>

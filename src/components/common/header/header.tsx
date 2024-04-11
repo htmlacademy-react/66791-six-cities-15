@@ -2,7 +2,7 @@ import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../ui/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {logoutAction} from '../../../store/api-actions';
+import {logoutAction, fetchOffersAction} from '../../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../../const';
 import {getUser} from '../../../store/user-process/user-process.selectors';
 import {getFavoriteOffers} from '../../../store/service-data/service-data.selectors';
@@ -23,7 +23,11 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
 
   const clickLogoutHandle = (evt: MouseEvent) => {
     evt.preventDefault();
-    dispatch(logoutAction());
+
+    dispatch(logoutAction())
+      .then(() => {
+        dispatch(fetchOffersAction());
+      });
   };
 
   return (
