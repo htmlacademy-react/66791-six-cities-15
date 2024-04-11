@@ -60,3 +60,7 @@ export enum BookmarkButtonType {
   PlaceCard = 'place-card',
   Offer = 'offer',
 }
+
+export const NUMBER_OFFERS = 3;
+
+export const NUMBER_REVIEWS = 10;

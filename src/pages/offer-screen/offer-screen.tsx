@@ -12,7 +12,7 @@ import Spinner from '../../components/ui/spinner';
 import BookmarkButton from '../../components/ui/bookmark-button';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {fetchOfferAction, fetchNearOffersAction, fetchOfferCommentsAction} from '../../store/api-actions';
-import {AuthorizationStatus, BookmarkButtonType} from '../../const';
+import {AuthorizationStatus, BookmarkButtonType, NUMBER_OFFERS, NUMBER_REVIEWS} from '../../const';
 import {getOffersLocation, percentageStars, firstLetterToUppercase} from '../../utils';
 import {
   getOfferDataLoadingStatus,
@@ -27,9 +27,6 @@ type OfferScreenProps = {
   authorizationStatus: AuthorizationStatus;
   setNotFound: (flag: boolean) => void;
 }
-
-const NUMBER_OFFERS = 3;
-const NUMBER_REVIEWS = 10;
 
 function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.Element {
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
