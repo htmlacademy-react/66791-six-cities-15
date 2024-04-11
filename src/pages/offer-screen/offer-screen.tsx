@@ -51,7 +51,6 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
       .catch(() => {
         setNotFindOffer(true);
       });
-
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -70,7 +69,6 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
         : (
           <>
             <Meta titleText={`6/Cities. ${currentOffer.title}`} />
-
             {!isOfferDataLoading && !isNearOffersDataLoading && !isOfferCommentsDataLoading && (
               <main className="page__main page__main--offer">
                 <section className="offer">

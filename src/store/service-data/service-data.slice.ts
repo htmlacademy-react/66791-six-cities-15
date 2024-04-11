@@ -111,6 +111,9 @@ export const serviceData = createSlice({
         state.offerComments.push(action.payload);
         state.isOfferCommentDataLoading = false;
       })
+      .addCase(addRewiewAction.rejected, (state) => {
+        state.isOfferCommentDataLoading = false;
+      })
       .addCase(changeFavoriteAction.pending, (state) => {
         state.isOfferCommentDataLoading = true;
       })

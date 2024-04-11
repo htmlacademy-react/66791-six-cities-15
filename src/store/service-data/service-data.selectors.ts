@@ -20,3 +20,5 @@ export const getOfferCommentsDataLoading = (state: State) => state[NameSpace.Dat
 export const getChangeFavoriteDataLoading = (state: State) => state[NameSpace.Data].isChangeFavoriteDataLoading;
 
 export const getFavoriteOffers = (state: State) => state[NameSpace.Data].favoriteOffers;
+
+export const getOfferCommentDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isOfferCommentDataLoading;

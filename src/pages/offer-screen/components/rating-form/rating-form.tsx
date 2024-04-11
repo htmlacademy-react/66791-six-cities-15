@@ -4,9 +4,11 @@ import {firstLetterToUppercase} from '../../../../utils';
 
 type RatingFormProps = {
   onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+  isDisabled: boolean;
+  checkedStar: number;
 }
 
-function RatingForm({onChange}: RatingFormProps): JSX.Element {
+function RatingForm({onChange, checkedStar, isDisabled}: RatingFormProps): JSX.Element {
   return (
     <div className="reviews__rating-form form__rating">
       {Array(NUMBER_STARS).fill('star').map((item, index, stars) => {
@@ -25,6 +27,8 @@ function RatingForm({onChange}: RatingFormProps): JSX.Element {
               id={`${starIndex}-${declension}`}
               type="radio"
               onChange={onChange}
+              disabled={isDisabled}
+              checked={checkedStar === starIndex}
             />
             <label
               htmlFor={`${starIndex}-${declension}`}
