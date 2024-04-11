@@ -29,13 +29,14 @@ type OfferScreenProps = {
 }
 
 const NUMBER_OFFERS = 3;
+const NUMBER_REVIEWS = 10;
 
 function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.Element {
   const isOfferDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const isNearOffersDataLoading = useAppSelector(getNearOffersDataLoadingStatus);
   const isOfferCommentsDataLoading = useAppSelector(getOfferCommentsDataLoading);
   const currentOffer = useAppSelector(getOffer);
-  const currentOfferReviews = useAppSelector(getOfferComments);
+  const currentOfferReviews = useAppSelector(getOfferComments).slice(0, NUMBER_REVIEWS);
   const nearOffers = useAppSelector(getNearOffers).slice(0, NUMBER_OFFERS);
 
   const {id = ''} = useParams();
@@ -71,7 +72,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
         ? <NothingFoundScreen state="offer" />
         : (
           <>
-            <Meta titleText="6/Cities. Beautiful &amp; luxurious studio at great location" />
+            <Meta titleText={`6/Cities. ${currentOffer.title}`} />
 
             {!isOfferDataLoading && !isNearOffersDataLoading && !isOfferCommentsDataLoading && (
               <main className="page__main page__main--offer">
