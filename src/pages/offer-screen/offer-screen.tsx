@@ -41,12 +41,19 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();
 
-  const [isNotFindOffer] = useState(!isOfferDataLoading && !currentOffer.id);
+  const [isNotFindOffer, setNotFindOffer] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchOfferAction(id));
-    dispatch(fetchOfferCommentsAction(id));
-    dispatch(fetchNearOffersAction(id));
+    dispatch(fetchOfferAction(id))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchOfferCommentsAction(id));
+        dispatch(fetchNearOffersAction(id));
+      })
+      .catch(() => {
+        setNotFindOffer(true);
+      });
+
   }, [id, dispatch]);
 
   useEffect(() => {
