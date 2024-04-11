@@ -17,7 +17,7 @@ function FavoritesLocationsItem({offers, clickChangeCityHandle}: FavoritesLocati
 
         return (
           isOffersForCity && (
-            <li className="favorites__locations-items">
+            <li className="favorites__locations-items" key={`${city}`}>
               <div className="favorites__locations locations locations--current">
                 <LocationsItem
                   city={city}
