@@ -87,6 +87,9 @@ export const serviceData = createSlice({
         state.offer = action.payload;
         state.isOfferDataLoading = false;
       })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.isOfferDataLoading = false;
+      })
       .addCase(fetchNearOffersAction.pending, (state) => {
         state.isNearOffersDataLoading = true;
       })
