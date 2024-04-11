@@ -59,7 +59,12 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                         </span>
                         <span className="header__favorite-count">{favoriteOffers.length}</span>
                       </>
-                    ) : <span className="header__login">Sign in</span>}
+                    ) : (
+                      <>
+                        <div className="header__avatar-wrapper user__avatar-wrapper" />
+                        <span className="header__login">Sign in</span>
+                      </>
+                    )}
 
                   </Link>
                 </li>
