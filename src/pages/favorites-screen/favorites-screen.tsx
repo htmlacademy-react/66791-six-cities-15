@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import {useEffect, useCallback} from 'react';
 import NothingFoundScreen from '../nothing-found-screen';
 import Meta from '../../components/common/meta';
 import FavoritesList from './components/favorites-list';
@@ -20,29 +20,34 @@ function FavoritesScreen({setNotFound}: FavoritesScreenProps): JSX.Element {
     dispatch(changeCity(changedCity));
   }, [dispatch]);
 
-  if (favoriteOffers.length === 0) {
-    setNotFound(true);
-    return <NothingFoundScreen state="favorites" />;
-  } else {
-    setNotFound(false);
-  }
+  useEffect(() => {
+    if (favoriteOffers.length === 0) {
+      setNotFound(true);
+    } else {
+      setNotFound(false);
+    }
+  }, [favoriteOffers, setNotFound]);
 
   return (
-    <>
-      <Meta titleText="6/Cities. Saved listing" />
+    !favoriteOffers.length
+      ? <NothingFoundScreen state="favorites" />
+      : (
+        <>
+          <Meta titleText="6/Cities. Saved listing" />
 
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList
-              offers={favoriteOffers}
-              onChangeCity={handleCityLinkClick}
-            />
-          </section>
-        </div>
-      </main>
-    </>
+          <main className="page__main page__main--favorites">
+            <div className="page__favorites-container container">
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <FavoritesList
+                  offers={favoriteOffers}
+                  onChangeCity={handleCityLinkClick}
+                />
+              </section>
+            </div>
+          </main>
+        </>
+      )
   );
 }
 

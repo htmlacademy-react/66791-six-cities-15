@@ -39,7 +39,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
   const {id = ''} = useParams();
   const dispatch = useAppDispatch();
 
-  const [isNotFindOffer, setNotFindOffer] = useState(false);
+  const [isNotFindOffer, setIsNotFindOffer] = useState(false);
 
   useEffect(() => {
     dispatch(fetchOfferAction(id))
@@ -49,7 +49,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
         dispatch(fetchNearOffersAction(id));
       })
       .catch(() => {
-        setNotFindOffer(true);
+        setIsNotFindOffer(true);
       });
   }, [id, dispatch]);
 
