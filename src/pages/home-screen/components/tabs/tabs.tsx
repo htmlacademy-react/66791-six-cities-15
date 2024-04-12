@@ -4,10 +4,10 @@ import {CitiesType, CityNameType} from '../../../../types';
 type TabsProps = {
   currentCity: string;
   cities: CitiesType;
-  clickChangeCityHandle: (changedCity: CityNameType) => void;
+  onChangeCity: (changedCity: CityNameType) => void;
 }
 
-function Tabs({currentCity, cities, clickChangeCityHandle}: TabsProps): JSX.Element {
+function Tabs({currentCity, cities, onChangeCity}: TabsProps): JSX.Element {
   return (
     <div className="tabs">
       <section className="locations container">
@@ -17,7 +17,7 @@ function Tabs({currentCity, cities, clickChangeCityHandle}: TabsProps): JSX.Elem
               key={city}
               isActiveCity={city.toLowerCase() === currentCity}
               city={city}
-              clickChangeCityHandle={clickChangeCityHandle}
+              onChangeCity={onChangeCity}
               isListItem
             />
           ))}

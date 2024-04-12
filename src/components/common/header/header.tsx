@@ -21,7 +21,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
 
   const isAuth = authStatus === AuthorizationStatus.Auth;
 
-  const clickLogoutHandle = (evt: MouseEvent) => {
+  const handleLogoutLinkClick = (evt: MouseEvent) => {
     evt.preventDefault();
 
     dispatch(logoutAction())
@@ -73,7 +73,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                     <Link
                       className="header__nav-link"
                       to={AppRoute.Root}
-                      onClick={clickLogoutHandle}
+                      onClick={handleLogoutLinkClick}
                     >
                       <span className="header__signout">Sign out</span>
                     </Link>

@@ -16,7 +16,7 @@ function LoginScreen(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const clickSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+  const handleLoginFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
@@ -39,7 +39,7 @@ function LoginScreen(): JSX.Element {
     }
   };
 
-  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
+  const handleCityLinkClick = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   }, [dispatch]);
 
@@ -51,7 +51,7 @@ function LoginScreen(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post" onSubmit={clickSubmitHandle}>
+            <form className="login__form form" action="#" method="post" onSubmit={handleLoginFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
@@ -85,7 +85,7 @@ function LoginScreen(): JSX.Element {
           <section className="locations locations--login locations--current">
             <LocationsItem
               city={currentCity}
-              clickChangeCityHandle={clickChangeCityHandle}
+              onChangeCity={handleCityLinkClick}
             />
           </section>
         </div>

@@ -24,7 +24,7 @@ function BookmarkButton({offerId, isFavorite, type}: BookmarkButtonProps): JSX.E
 
   const isPlaceCard = type === BookmarkButtonType.PlaceCard;
 
-  const clickChangeFavoriteHandler = () => {
+  const handleBookmarkButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       const favoriteData = {
         offerId,
@@ -46,7 +46,7 @@ function BookmarkButton({offerId, isFavorite, type}: BookmarkButtonProps): JSX.E
     <button
       className={`${type}__bookmark-button ${isActiveBookmarkButton ? `${type}__bookmark-button--active` : ''} button`}
       type="button"
-      onClick={clickChangeFavoriteHandler}
+      onClick={handleBookmarkButtonClick}
       disabled={isChangeFavoriteDataLoading}
     >
       <svg

@@ -40,8 +40,8 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
     : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
   const offersLocation = useMemo(() => getOffersLocation(offers), [offers]);
 
-  const hoverPlaceCardHandle = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
-  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
+  const handlePlaceCardArticleHover = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
+  const handleCityLinkClick = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   }, [dispatch]);
 
@@ -72,7 +72,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
           <Tabs
             cities={cities}
             currentCity={currentTab}
-            clickChangeCityHandle={clickChangeCityHandle}
+            onChangeCity={handleCityLinkClick}
           />
 
           <div className="cities">
@@ -84,7 +84,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                   <PlacesSorting />
                   <PlacesList
                     offers={offers}
-                    hoverPlaceCard={hoverPlaceCardHandle}
+                    onHoverPlaceCard={handlePlaceCardArticleHover}
                   />
                 </section>
               )}

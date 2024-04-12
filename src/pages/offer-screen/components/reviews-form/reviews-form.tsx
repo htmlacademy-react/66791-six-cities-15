@@ -23,7 +23,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   const [checkedStar, setCheckedStar] = useState(0);
   const {rating, review} = reviewsFormData;
 
-  const clickSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewsFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     dispatch(addRewiewAction({
@@ -41,7 +41,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       });
   };
 
-  const changeFieldHandle = (evt: ChangeFieldHandleType): void => {
+  const handleFieldChange = (evt: ChangeFieldHandleType): void => {
     const {name, value} = evt.target;
     setReviewsFormData({...reviewsFormData, [name]: value});
 
@@ -51,12 +51,12 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={clickSubmitHandle}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleReviewsFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
       <RatingForm
-        onChange={changeFieldHandle}
+        onChange={handleFieldChange}
         checkedStar={checkedStar}
         isDisabled={isOfferCommentDataLoading}
       />
@@ -66,7 +66,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={reviewsFormData.review}
-        onChange={changeFieldHandle}
+        onChange={handleFieldChange}
         disabled={isOfferCommentDataLoading}
       />
       <div className="reviews__button-wrapper">

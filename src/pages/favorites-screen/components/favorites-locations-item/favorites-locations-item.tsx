@@ -5,10 +5,10 @@ import {CITIES} from '../../../../const';
 
 type FavoritesLocationsItemProps = {
   offers: OffersType[];
-  clickChangeCityHandle: (changedCity: CityNameType) => void;
+  onChangeCity: (changedCity: CityNameType) => void;
 }
 
-function FavoritesLocationsItem({offers, clickChangeCityHandle}: FavoritesLocationsItemProps): JSX.Element {
+function FavoritesLocationsItem({offers, onChangeCity}: FavoritesLocationsItemProps): JSX.Element {
 
   return (
     <>
@@ -21,7 +21,7 @@ function FavoritesLocationsItem({offers, clickChangeCityHandle}: FavoritesLocati
               <div className="favorites__locations locations locations--current">
                 <LocationsItem
                   city={city}
-                  clickChangeCityHandle={clickChangeCityHandle}
+                  onChangeCity={onChangeCity}
                 />
               </div>
               <div className="favorites__places">

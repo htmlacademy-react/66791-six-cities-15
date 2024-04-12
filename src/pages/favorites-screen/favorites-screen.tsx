@@ -16,7 +16,7 @@ function FavoritesScreen({setNotFound}: FavoritesScreenProps): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
+  const handleCityLinkClick = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   }, [dispatch]);
 
@@ -37,7 +37,7 @@ function FavoritesScreen({setNotFound}: FavoritesScreenProps): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <FavoritesList
               offers={favoriteOffers}
-              clickChangeCityHandle={clickChangeCityHandle}
+              onChangeCity={handleCityLinkClick}
             />
           </section>
         </div>
