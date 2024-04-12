@@ -81,7 +81,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <PlacesFound numberOffers={numberOffers} city={currentCity}/>
-                  <PlacesSorting/>
+                  <PlacesSorting />
                   <PlacesList
                     offers={offers}
                     hoverPlaceCard={hoverPlaceCardHandle}

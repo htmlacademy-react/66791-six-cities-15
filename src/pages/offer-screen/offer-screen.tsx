@@ -69,7 +69,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
         : (
           <>
             <Meta titleText={`6/Cities. ${currentOffer.title}`} />
-            {!isOfferDataLoading && !isNearOffersDataLoading && !isOfferCommentsDataLoading && (
+            {!isOfferDataLoading && (
               <main className="page__main page__main--offer">
                 <section className="offer">
                   <div className="offer__gallery-container container">
@@ -140,11 +140,15 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
                         </div>
                       </div>
                       <section className="offer__reviews reviews">
-                        <h2 className="reviews__title">
-                          Reviews · <span className="reviews__amount">{currentOfferReviews.length}</span>
-                        </h2>
-                        <ReviewsList reviews={currentOfferReviews}/>
-                        {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={id} />}
+                        {!isOfferCommentsDataLoading && (
+                          <>
+                            <h2 className="reviews__title">
+                              Reviews · <span className="reviews__amount">{currentOfferReviews.length}</span>
+                            </h2>
+                            <ReviewsList reviews={currentOfferReviews}/>
+                          </>
+                        )}
+                        {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={id}/>}
                       </section>
                     </div>
                   </div>
@@ -154,9 +158,11 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
                     selectedPointId={id}
                   />
                 </section>
-                <div className="container">
-                  <NearPlaces offers={nearOffers}/>
-                </div>
+                {!isNearOffersDataLoading && (
+                  <div className="container">
+                    <NearPlaces offers={nearOffers}/>
+                  </div>
+                )}
               </main>
             )}
           </>
