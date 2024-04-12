@@ -30,9 +30,13 @@ function BookmarkButton({offerId, isFavorite, type}: BookmarkButtonProps): JSX.E
         offerId,
         isFavorite: !isActiveBookmarkButton
       };
-      dispatch(changeFavoriteAction(favoriteData));
-      setIsActiveBookmarkButton(!isActiveBookmarkButton);
-      dispatch(refreshOffers(favoriteData));
+
+      dispatch(changeFavoriteAction(favoriteData))
+        .unwrap()
+        .then(() => {
+          setIsActiveBookmarkButton(!isActiveBookmarkButton);
+          dispatch(refreshOffers(favoriteData));
+        });
     } else {
       navigate(AppRoute.Login);
     }

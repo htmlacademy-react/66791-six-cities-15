@@ -115,7 +115,7 @@ export const serviceData = createSlice({
         state.isOfferCommentDataLoading = false;
       })
       .addCase(changeFavoriteAction.pending, (state) => {
-        state.isOfferCommentDataLoading = true;
+        state.isChangeFavoriteDataLoading = true;
       })
       .addCase(changeFavoriteAction.fulfilled, (state, action) => {
         const {offer, isFavorite} = action.payload;
@@ -126,7 +126,10 @@ export const serviceData = createSlice({
           state.favoriteOffers = state.favoriteOffers.filter((item) => item.id !== offer.id);
         }
 
-        state.isOfferCommentDataLoading = false;
+        state.isChangeFavoriteDataLoading = false;
+      })
+      .addCase(changeFavoriteAction.rejected, (state) => {
+        state.isChangeFavoriteDataLoading = false;
       })
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
         state.isFavoriteOffersDataLoading = true;
