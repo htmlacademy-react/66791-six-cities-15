@@ -3,6 +3,7 @@ import {useAppSelector, useAppDispatch} from '../../../../hooks';
 import {addRewiewAction} from '../../../../store/api-actions';
 import {getOfferCommentDataLoadingStatus} from '../../../../store/service-data/service-data.selectors';
 import RatingForm from '../rating-form';
+import {CharacterLimitReview} from '../../../../const';
 
 type ChangeFieldHandleType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
@@ -78,7 +79,12 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === 0 || review.length < 50 || review.length > 300 || isOfferCommentDataLoading}
+          disabled={
+            isOfferCommentDataLoading
+              || !rating
+              || review.length < CharacterLimitReview.MinChar
+              || review.length > CharacterLimitReview.MaxChar
+          }
         >
           Submit
         </button>

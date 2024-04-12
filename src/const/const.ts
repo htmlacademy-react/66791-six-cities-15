@@ -66,3 +66,8 @@ export enum Number {
   Reviews = 10,
   PreviewImages = 6,
 }
+
+export const CharacterLimitReview = {
+  MinChar: 50,
+  MaxChar: 300
+} as const;
