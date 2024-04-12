@@ -37,13 +37,20 @@ export const getSortedOffers = createSelector(
   (offers, activeSortType) => {
     switch (activeSortType) {
       case 'SortPriceLowToHigh':
-        return [...offers].sort((offerA, offerB) => offerA.price - offerB.price);
+        return offers.toSorted((offerA, offerB) => offerA.price - offerB.price);
       case 'SortPriceHighToLow':
-        return [...offers].sort((offerA, offerB) => offerB.price - offerA.price);
+        return offers.toSorted((offerA, offerB) => offerB.price - offerA.price);
       case 'SortTopRatedFirst':
-        return [...offers].sort((offerA, offerB) => offerB.rating - offerA.rating);
+        return offers.toSorted((offerA, offerB) => offerB.rating - offerA.rating);
       default:
         return offers;
     }
   }
+);
+
+export const getSortedComments = createSelector(
+  [getOfferComments],
+  (offerComments) => offerComments.toSorted(
+    (reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date)
+  )
 );

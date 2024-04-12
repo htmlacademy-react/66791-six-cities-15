@@ -19,8 +19,8 @@ import {
   getNearOffersDataLoadingStatus,
   getOfferCommentsDataLoading,
   getOffer,
-  getOfferComments,
-  getNearOffers
+  getNearOffers,
+  getSortedComments
 } from '../../store/service-data/service-data.selectors';
 
 type OfferScreenProps = {
@@ -33,7 +33,7 @@ function OfferScreen({authorizationStatus, setNotFound}: OfferScreenProps): JSX.
   const isNearOffersDataLoading = useAppSelector(getNearOffersDataLoadingStatus);
   const isOfferCommentsDataLoading = useAppSelector(getOfferCommentsDataLoading);
   const currentOffer = useAppSelector(getOffer);
-  const currentOfferReviews = useAppSelector(getOfferComments).slice(0, Number.Reviews);
+  const currentOfferReviews = useAppSelector(getSortedComments).slice(0, Number.Reviews);
   const nearOffers = useAppSelector(getNearOffers).slice(0, Number.Offers);
 
   const {id = ''} = useParams();
