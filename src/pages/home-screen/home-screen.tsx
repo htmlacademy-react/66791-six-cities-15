@@ -13,7 +13,7 @@ import {changeCity} from '../../store/service-process/service-process.slice';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
 import {CitiesType, CityNameType} from '../../types';
 import {getCurrentCity} from '../../store/service-process/service-process.selectors';
-import {getOffers, getOffersDataLoadingStatus} from '../../store/service-data/service-data.selectors';
+import {getOffersDataLoadingStatus, getSortedOffers} from '../../store/service-data/service-data.selectors';
 
 type HomeScreenProps = {
   cities: CitiesType;
@@ -22,9 +22,7 @@ type HomeScreenProps = {
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
-  const offers = useAppSelector(getOffers).filter(
-    (offer) => offer.city.name === currentCity
-  );
+  const offers = useAppSelector(getSortedOffers);
 
   const dispatch = useAppDispatch();
 
