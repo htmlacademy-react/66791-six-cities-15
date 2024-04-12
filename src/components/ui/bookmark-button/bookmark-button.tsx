@@ -24,15 +24,19 @@ function BookmarkButton({offerId, isFavorite, type}: BookmarkButtonProps): JSX.E
 
   const isPlaceCard = type === BookmarkButtonType.PlaceCard;
 
-  const clickChangeFavoriteHandler = () => {
+  const handleBookmarkButtonClick = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       const favoriteData = {
         offerId,
         isFavorite: !isActiveBookmarkButton
       };
-      dispatch(changeFavoriteAction(favoriteData));
-      setIsActiveBookmarkButton(!isActiveBookmarkButton);
-      dispatch(refreshOffers(favoriteData));
+
+      dispatch(changeFavoriteAction(favoriteData))
+        .unwrap()
+        .then(() => {
+          setIsActiveBookmarkButton(!isActiveBookmarkButton);
+          dispatch(refreshOffers(favoriteData));
+        });
     } else {
       navigate(AppRoute.Login);
     }
@@ -42,7 +46,7 @@ function BookmarkButton({offerId, isFavorite, type}: BookmarkButtonProps): JSX.E
     <button
       className={`${type}__bookmark-button ${isActiveBookmarkButton ? `${type}__bookmark-button--active` : ''} button`}
       type="button"
-      onClick={clickChangeFavoriteHandler}
+      onClick={handleBookmarkButtonClick}
       disabled={isChangeFavoriteDataLoading}
     >
       <svg

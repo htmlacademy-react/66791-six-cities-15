@@ -3,15 +3,15 @@ import {CityNameType, OffersType} from '../../../../types';
 
 type FavoritesListProps = {
   offers: OffersType[];
-  clickChangeCityHandle: (changedCity: CityNameType) => void;
+  onChangeCity: (changedCity: CityNameType) => void;
 }
 
-function FavoritesList({offers, clickChangeCityHandle}: FavoritesListProps): JSX.Element {
+function FavoritesList({offers, onChangeCity}: FavoritesListProps): JSX.Element {
   return (
     <ul className="favorites__list">
       <FavoritesLocationsItem
         offers={offers}
-        clickChangeCityHandle={clickChangeCityHandle}
+        onChangeCity={onChangeCity}
       />
     </ul>
   );

@@ -1,3 +1,5 @@
+import {createSelector} from '@reduxjs/toolkit';
+import {getCurrentCity, getActiveSortType} from '../service-process/service-process.selectors';
 import {NameSpace} from '../../const';
 import {OffersType, OfferType, ReviewsType, State} from '../../types';
 
@@ -20,3 +22,35 @@ export const getOfferCommentsDataLoading = (state: State) => state[NameSpace.Dat
 export const getChangeFavoriteDataLoading = (state: State) => state[NameSpace.Data].isChangeFavoriteDataLoading;
 
 export const getFavoriteOffers = (state: State) => state[NameSpace.Data].favoriteOffers;
+
+export const getOfferCommentDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isOfferCommentDataLoading;
+
+export const getOffersFilterByCity = createSelector(
+  [getOffers, getCurrentCity],
+  (offers, currentCity) => offers.filter(
+    (offer) => offer.city.name === currentCity
+  )
+);
+
+export const getSortedOffers = createSelector(
+  [getOffersFilterByCity, getActiveSortType],
+  (offers, activeSortType) => {
+    switch (activeSortType) {
+      case 'SortPriceLowToHigh':
+        return offers.toSorted((offerA, offerB) => offerA.price - offerB.price);
+      case 'SortPriceHighToLow':
+        return offers.toSorted((offerA, offerB) => offerB.price - offerA.price);
+      case 'SortTopRatedFirst':
+        return offers.toSorted((offerA, offerB) => offerB.rating - offerA.rating);
+      default:
+        return offers;
+    }
+  }
+);
+
+export const getSortedComments = createSelector(
+  [getOfferComments],
+  (offerComments) => offerComments.toSorted(
+    (reviewA, reviewB) => Date.parse(reviewB.date) - Date.parse(reviewA.date)
+  )
+);

@@ -2,7 +2,7 @@ import {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../../ui/logo';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {logoutAction} from '../../../store/api-actions';
+import {logoutAction, fetchOffersAction} from '../../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../../const';
 import {getUser} from '../../../store/user-process/user-process.selectors';
 import {getFavoriteOffers} from '../../../store/service-data/service-data.selectors';
@@ -21,9 +21,13 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
 
   const isAuth = authStatus === AuthorizationStatus.Auth;
 
-  const clickLogoutHandle = (evt: MouseEvent) => {
+  const handleLogoutLinkClick = (evt: MouseEvent) => {
     evt.preventDefault();
-    dispatch(logoutAction());
+
+    dispatch(logoutAction())
+      .then(() => {
+        dispatch(fetchOffersAction());
+      });
   };
 
   return (
@@ -55,7 +59,12 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                         </span>
                         <span className="header__favorite-count">{favoriteOffers.length}</span>
                       </>
-                    ) : <span className="header__login">Sign in</span>}
+                    ) : (
+                      <>
+                        <div className="header__avatar-wrapper user__avatar-wrapper" />
+                        <span className="header__login">Sign in</span>
+                      </>
+                    )}
 
                   </Link>
                 </li>
@@ -64,7 +73,7 @@ function Header({isRenderUser, isRootRoute, authStatus}: HeaderProps): JSX.Eleme
                     <Link
                       className="header__nav-link"
                       to={AppRoute.Root}
-                      onClick={clickLogoutHandle}
+                      onClick={handleLogoutLinkClick}
                     >
                       <span className="header__signout">Sign out</span>
                     </Link>

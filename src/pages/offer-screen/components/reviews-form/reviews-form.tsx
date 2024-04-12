@@ -1,7 +1,9 @@
 import {useState, ChangeEvent, FormEvent} from 'react';
-import {useAppDispatch} from '../../../../hooks';
+import {useAppSelector, useAppDispatch} from '../../../../hooks';
 import {addRewiewAction} from '../../../../store/api-actions';
+import {getOfferCommentDataLoadingStatus} from '../../../../store/service-data/service-data.selectors';
 import RatingForm from '../rating-form';
+import {CharacterLimitReview} from '../../../../const';
 
 type ChangeFieldHandleType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 
@@ -10,47 +12,62 @@ type ReviewsFormProps = {
 }
 
 function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
+  const isOfferCommentDataLoading = useAppSelector(getOfferCommentDataLoadingStatus);
+
   const dispatch = useAppDispatch();
 
   const [reviewsFormData, setReviewsFormData] = useState({
     rating: 0,
     review: ''
   });
+  const [checkedStar, setCheckedStar] = useState(0);
   const {rating, review} = reviewsFormData;
 
-  const clickSubmitHandle = (evt: FormEvent<HTMLFormElement>) => {
+  const handleReviewsFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     dispatch(addRewiewAction({
       offerId,
       comment: reviewsFormData.review,
-      rating: +reviewsFormData.rating
-    }));
-
-    setReviewsFormData({
-      rating: 0,
-      review: ''
-    });
+      rating: Number(reviewsFormData.rating)
+    }))
+      .unwrap()
+      .then(() => {
+        setReviewsFormData({
+          rating: 0,
+          review: ''
+        });
+        setCheckedStar(0);
+      });
   };
 
-  const changeFieldHandle = (evt: ChangeFieldHandleType): void => {
+  const handleFieldChange = (evt: ChangeFieldHandleType): void => {
     const {name, value} = evt.target;
     setReviewsFormData({...reviewsFormData, [name]: value});
+
+    if (name === 'rating') {
+      setCheckedStar(Number(value));
+    }
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={clickSubmitHandle}>
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleReviewsFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
-      <RatingForm onChange={changeFieldHandle} />
+      <RatingForm
+        onChange={handleFieldChange}
+        checkedStar={checkedStar}
+        isDisabled={isOfferCommentDataLoading}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={reviewsFormData.review}
-        onChange={changeFieldHandle}
+        onChange={handleFieldChange}
+        disabled={isOfferCommentDataLoading}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -62,7 +79,12 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === 0 || review.length < 50 || review.length > 300}
+          disabled={
+            isOfferCommentDataLoading
+              || !rating
+              || review.length < CharacterLimitReview.MinChar
+              || review.length > CharacterLimitReview.MaxChar
+          }
         >
           Submit
         </button>

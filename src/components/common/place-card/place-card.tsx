@@ -7,7 +7,7 @@ import {firstLetterToUppercase, percentageStars} from '../../../utils';
 type PlaceCardProps = {
   isNearPlace?: boolean;
   isFavorites?: boolean;
-  hoverPlaceCard?: (offerId: string) => void;
+  onHoverPlaceCard?: (offerId: string) => void;
 }
 
 function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
@@ -22,7 +22,7 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
     isFavorite,
     isPremium,
     rating,
-    hoverPlaceCard
+    onHoverPlaceCard
   } = props;
 
   const placeCardDefineClassName = (): {articleClassName: string; wrapperClassName: string} => {
@@ -49,8 +49,8 @@ function PlaceCard(props: OffersType & PlaceCardProps): JSX.Element {
   return (
     <article
       className={`${articleClassName} place-card`}
-      onMouseEnter={() => hoverPlaceCard && hoverPlaceCard(id)}
-      onMouseLeave={() => hoverPlaceCard && hoverPlaceCard('')}
+      onMouseEnter={() => onHoverPlaceCard && onHoverPlaceCard(id)}
+      onMouseLeave={() => onHoverPlaceCard && onHoverPlaceCard('')}
     >
       {isPremium && (
         <div className="place-card__mark">

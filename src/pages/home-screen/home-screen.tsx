@@ -13,7 +13,7 @@ import {changeCity} from '../../store/service-process/service-process.slice';
 import {getOffersLocation, firstLetterToUppercase} from '../../utils';
 import {CitiesType, CityNameType} from '../../types';
 import {getCurrentCity} from '../../store/service-process/service-process.selectors';
-import {getOffers, getOffersDataLoadingStatus} from '../../store/service-data/service-data.selectors';
+import {getOffersDataLoadingStatus, getSortedOffers} from '../../store/service-data/service-data.selectors';
 
 type HomeScreenProps = {
   cities: CitiesType;
@@ -22,9 +22,7 @@ type HomeScreenProps = {
 function HomeScreen({cities}: HomeScreenProps): JSX.Element {
   const currentCity = useAppSelector(getCurrentCity);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
-  const offers = useAppSelector(getOffers).filter(
-    (offer) => offer.city.name === currentCity
-  );
+  const offers = useAppSelector(getSortedOffers);
 
   const dispatch = useAppDispatch();
 
@@ -42,8 +40,8 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
     : { name: '', location: { latitude: 0, longitude: 0, zoom: 0 } };
   const offersLocation = useMemo(() => getOffersLocation(offers), [offers]);
 
-  const hoverPlaceCardHandle = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
-  const clickChangeCityHandle = useCallback((changedCity: CityNameType): void => {
+  const handlePlaceCardArticleHover = useCallback((offerId: string): void => setActivePlaceCardId(offerId), []);
+  const handleCityLinkClick = useCallback((changedCity: CityNameType): void => {
     dispatch(changeCity(changedCity));
   }, [dispatch]);
 
@@ -74,7 +72,7 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
           <Tabs
             cities={cities}
             currentCity={currentTab}
-            clickChangeCityHandle={clickChangeCityHandle}
+            onChangeCity={handleCityLinkClick}
           />
 
           <div className="cities">
@@ -83,10 +81,10 @@ function HomeScreen({cities}: HomeScreenProps): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <PlacesFound numberOffers={numberOffers} city={currentCity}/>
-                  <PlacesSorting/>
+                  <PlacesSorting />
                   <PlacesList
                     offers={offers}
-                    hoverPlaceCard={hoverPlaceCardHandle}
+                    onHoverPlaceCard={handlePlaceCardArticleHover}
                   />
                 </section>
               )}

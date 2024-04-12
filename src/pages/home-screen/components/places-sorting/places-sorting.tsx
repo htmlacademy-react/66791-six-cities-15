@@ -15,15 +15,15 @@ function PlacesSorting(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const clickPlacesOptionsOpenHandle = (isOpen: boolean): void => setIsPlacesOptionsOpen(isOpen);
-  const clickSortingHandle = (type: SortOffersType): void => {
+  const handlePlacesSortingFormClick = (isOpen: boolean): void => setIsPlacesOptionsOpen(isOpen);
+  const handlePlacesOptionClick = (type: SortOffersType): void => {
     dispatch(changeSortType(type));
 
     setIsPlacesOptionsOpen(false);
   };
 
   useEffect(() => {
-    const clickCloseSortOptionsHandle = (evt: MouseEvent): void => {
+    const handleCloseSortOptionsClick = (evt: MouseEvent): void => {
       if (sortingTypeRef.current && sortingOptionsRef.current) {
         const withinBoundariesBtn = evt.composedPath().includes(sortingTypeRef.current);
         const withinBoundariesModal = evt.composedPath().includes(sortingOptionsRef.current);
@@ -34,19 +34,19 @@ function PlacesSorting(): JSX.Element {
       }
     };
 
-    const keydownCloseSortOptionsHandle = (evt: KeyboardEvent): void => {
+    const handleCloseSortOptionsKeydown = (evt: KeyboardEvent): void => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
         setIsPlacesOptionsOpen(false);
       }
     };
 
-    document.addEventListener('click', clickCloseSortOptionsHandle);
-    document.addEventListener('keydown', keydownCloseSortOptionsHandle);
+    document.addEventListener('click', handleCloseSortOptionsClick);
+    document.addEventListener('keydown', handleCloseSortOptionsKeydown);
 
     return () => {
-      document.removeEventListener('click', clickCloseSortOptionsHandle);
-      document.removeEventListener('keydown', keydownCloseSortOptionsHandle);
+      document.removeEventListener('click', handleCloseSortOptionsClick);
+      document.removeEventListener('keydown', handleCloseSortOptionsKeydown);
     };
   }, []);
 
@@ -58,7 +58,7 @@ function PlacesSorting(): JSX.Element {
         ref={sortingTypeRef}
         className="places__sorting-type"
         tabIndex={0}
-        onClick={() => clickPlacesOptionsOpenHandle(!isPlacesOptionsOpen)}
+        onClick={() => handlePlacesSortingFormClick(!isPlacesOptionsOpen)}
       >
         {SortingOption[activeSortType]}
         <svg className="places__sorting-arrow" width={7} height={4}>
@@ -74,7 +74,7 @@ function PlacesSorting(): JSX.Element {
             key={option}
             className={`places__option ${option === activeSortType ? 'places__option--active' : ''}`}
             tabIndex={0}
-            onClick={() => clickSortingHandle(option as SortOffersType)}
+            onClick={() => handlePlacesOptionClick(option as SortOffersType)}
           >
             {SortingOption[option as SortOffersType]}
           </li>
